@@ -18,7 +18,7 @@ import org.firstinspires.ftc.teamcode.team4348.utils.Utilities;
 public class teleOp extends OpMode
 {
     //IdealBot used as a container for all the bot hardware
-    private IdealBot bot = new IdealBot(hardwareMap);
+    private IdealBot bot = new IdealBot();
 
     private static final double stickThresh = 0.125;
     /**
@@ -28,7 +28,8 @@ public class teleOp extends OpMode
     @Override
     public void init()
     {
-
+        bot.init(hardwareMap);
+        bot.clamp.setPosition(0.4);
     }
 
     /**
@@ -58,7 +59,7 @@ public class teleOp extends OpMode
             bot.rMotor.setPower(0);
         }
 
-        if(gamepad1.dpad_up)
+        if(gamepad1.left_trigger > stickThresh)
         {
             bot.lExtend.setPower(Utilities.scalePower(gamepad1.left_trigger)[0]);
             bot.rExtend.setPower(Utilities.scalePower(gamepad1.left_trigger)[1]);
@@ -68,12 +69,37 @@ public class teleOp extends OpMode
             bot.rExtend.setPower(0);
         }
 
-        if(gamepad1.dpad_down)
+        if(gamepad1.right_trigger > stickThresh)
         {
             bot.lExtend.setPower(-Utilities.scalePower(gamepad1.right_trigger)[0]);
             bot.rExtend.setPower(-Utilities.scalePower(gamepad1.right_trigger)[1]);
             bot.rExtend.setPower(0);
             bot.lExtend.setPower(0);
         }
+
+        if(gamepad1.dpad_up)
+        {
+            bot.lift.setPower(1);
+        }else{
+            bot.lift.setPower(0);
+        }
+
+        if(gamepad1.dpad_down){
+            bot.lift.setPower(-1);
+        }else{
+            bot.lift.setPower(0);
+        }
+
+        if(gamepad1.x)
+        {
+            bot.clamp.setPosition(0.4);
+        }
+
+        if(gamepad1.b)
+        {
+            bot.clamp.setPosition(0.7);
+        }
     }
 }
+
+

@@ -16,7 +16,7 @@ public class getColor
 
     public getColor(HardwareMap hardwareMap)
     {
-        bot = new IdealBot(hardwareMap);
+        bot = new IdealBot();
         bot.init(hardwareMap);
     }
 

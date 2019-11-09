@@ -15,7 +15,7 @@ import java.util.concurrent.TimeUnit;
 @TeleOp(name="Calibration: PIDCalibration",group="Calibration")
 public class PIDCalibration extends CustomAutonomous
 {
-    IdealBot bot = new IdealBot(hardwareMap);
+    IdealBot bot = new IdealBot();
     ADAFruitIMU imu = bot.imu;
     PIDController pidController;
     final double THRESHOLD = 0.5;

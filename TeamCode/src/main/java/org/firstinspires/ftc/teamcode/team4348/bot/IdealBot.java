@@ -4,6 +4,7 @@ import com.qualcomm.robotcore.hardware.ColorSensor;
 import com.qualcomm.robotcore.hardware.DcMotor;
 import com.qualcomm.robotcore.hardware.DcMotorSimple;
 import com.qualcomm.robotcore.hardware.HardwareMap;
+import com.qualcomm.robotcore.hardware.Servo;
 
 import org.firstinspires.ftc.teamcode.team4348.PID.ADAFruitIMU;
 
@@ -14,6 +15,7 @@ import org.firstinspires.ftc.teamcode.team4348.PID.ADAFruitIMU;
 public class IdealBot extends org.firstinspires.ftc.teamcode.team4348.bot.Bot
 {
 
+    private HardwareMap hardware;
     /** BOT HARDWARE **/
     //motors
     public DcMotor lMotor;
@@ -28,30 +30,33 @@ public class IdealBot extends org.firstinspires.ftc.teamcode.team4348.bot.Bot
     public ColorSensor lSensor;
 
     //Servos
+    public Servo clamp;
 
     //constructor
-    public IdealBot(HardwareMap hMap)
+    public IdealBot()
     {
         //identifies the hardwaremap variable as the one defined in this class
         //sets it equal to the one given by the code in the teleop class
         //hmap
-        this.init(hMap);
-
     }
 
     //initializing hardware
     public void init(HardwareMap hardwareMap)
     {
+        this.hardware = hardwareMap;
+
         //motors, all set to use encoders
-        rMotor = hardwareMap.dcMotor.get("rMotor");
+        rMotor = hardware.dcMotor.get("rMotor");
         rMotor.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
-        lMotor = hardwareMap.dcMotor.get("lMotor");
+        lMotor = hardware.dcMotor.get("lMotor");
         lMotor.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
-        rExtend = hardwareMap.dcMotor.get("rExtend");
+        rExtend = hardware.dcMotor.get("rExtend");
         rExtend.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
-        lExtend = hardwareMap.dcMotor.get("lExtend");
+        lExtend = hardware.dcMotor.get("lExtend");
         lExtend.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
         lExtend.setDirection(DcMotor.Direction.REVERSE);
-        //lift = hardwareMap.dcMotor.get("lift");
+        lift = hardware.dcMotor.get("lift");
+        clamp = hardware.servo.get("clamp");
+        clamp.scaleRange(0,1);
     }
 }
