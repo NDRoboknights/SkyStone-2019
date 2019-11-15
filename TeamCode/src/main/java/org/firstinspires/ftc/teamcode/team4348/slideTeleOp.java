@@ -4,7 +4,7 @@ import com.qualcomm.robotcore.eventloop.opmode.OpMode;
 import com.qualcomm.robotcore.eventloop.opmode.TeleOp;
 
 import org.firstinspires.ftc.teamcode.team4348.bot.IdealBot;
-import org.firstinspires.ftc.teamcode.team4348.utils.Utilities;
+import org.firstinspires.ftc.teamcode.team4348.bot.TestSlideBot;
 
 /**
  * This is the teleOp class. This is where your bot variable will go to access hardware.
@@ -14,11 +14,11 @@ import org.firstinspires.ftc.teamcode.team4348.utils.Utilities;
  * If you would like samples, check FTCRobotController>src>main>java>...>external.samples
  * There you will find well documented sample pieces of code showing general form.
  */
-@TeleOp(name="TeleOp")
-public class teleOp extends OpMode
+@TeleOp(name="SlideTele")
+public class slideTeleOp extends OpMode
 {
     //IdealBot used as a container for all the bot hardware
-    private IdealBot bot = new IdealBot();
+    private TestSlideBot bot = new TestSlideBot();
 
     private static final double stickThresh = 0.125;
     /**
@@ -29,7 +29,6 @@ public class teleOp extends OpMode
     public void init()
     {
         bot.init(hardwareMap);
-        bot.clamp.setPosition(0.0);
     }
 
     /**
@@ -40,55 +39,29 @@ public class teleOp extends OpMode
     public void loop()
     {
         double lStick = -gamepad1.left_stick_y;
-        double rStick = gamepad1.right_stick_y;
+        double rStick = gamepad1.right_stick_x;
 
-        if(Math.abs(lStick)>stickThresh)
+        if(Math.abs(rStick)>stickThresh)
         {
             bot.lMotor.setPower(lStick);
             bot.rMotor.setPower(-lStick);
         }else
             {
                 bot.lMotor.setPower(0);
+                bot.rMotor.setPower(0);
         }
 
 
         if(Math.abs(rStick)>stickThresh)
         {
-            bot.rMotor.setPower(rStick);
+            bot.slide.setPower(rStick);
         }else
             {
-            bot.rMotor.setPower(0);
-        }
-
-        if(Math.abs(gamepad1.right_stick_x)>stickThresh)
-        {
-            bot.slide.setPower(gamepad1.right_stick_x);
-        }else{
             bot.slide.setPower(0);
         }
 
-        if(gamepad1.dpad_up)
-        {
-            bot.lift.setPower(-1);
-        }else{
-            bot.lift.setPower(0);
-        }
-
-        if(gamepad1.dpad_down){
-            bot.lift.setPower(1);
-        }else{
-            bot.lift.setPower(0);
-        }
-
-        if(gamepad1.x)
-        {
-            bot.clamp.setPosition(1);
-        }
-
-        if(gamepad1.b)
-        {
-            bot.clamp.setPosition(0);
-        }
+        telemetry.addData("Nick Chung: ", true);
+        telemetry.update();
     }
 }
 
