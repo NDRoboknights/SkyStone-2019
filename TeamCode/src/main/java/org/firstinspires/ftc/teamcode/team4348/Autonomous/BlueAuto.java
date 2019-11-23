@@ -4,8 +4,9 @@ package org.firstinspires.ftc.teamcode.team4348.Autonomous;
 import com.qualcomm.robotcore.eventloop.opmode.Autonomous;
 import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
 
+import org.firstinspires.ftc.teamcode.team4348.Enums.Color;
 import org.firstinspires.ftc.teamcode.team4348.bot.IdealBot;
-import org.firstinspires.ftc.teamcode.team4348.utils.Utilities;
+import org.firstinspires.ftc.teamcode.team4348.utils.getColor;
 
 /**
  * This class is the blue alliance autonomous. It consists of just the function runOpMode.
@@ -24,6 +25,10 @@ public class BlueAuto extends LinearOpMode
     public void runOpMode()
     {
         bot.init(hardwareMap);
-
+        while(getColor.interpretColor(bot.bottomSensor.red(), bot.bottomSensor.blue()) != Color.BLUE)
+        {
+            bot.slide.setPower(0.5);
+        }
+        bot.slide.setPower(0);
     }
 }

@@ -3,6 +3,10 @@ package org.firstinspires.ftc.teamcode.team4348.Autonomous;
 import com.qualcomm.robotcore.eventloop.opmode.Autonomous;
 import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
 
+import org.firstinspires.ftc.teamcode.team4348.Enums.Color;
+import org.firstinspires.ftc.teamcode.team4348.bot.IdealBot;
+import org.firstinspires.ftc.teamcode.team4348.utils.getColor;
+
 
 /**
  * This class is the red alliance autonomous. It consists of just the function runOpMode.
@@ -16,5 +20,15 @@ public class RedAuto extends LinearOpMode
     /**
      * This is the function where all of your code should go for it to affect the bot during the autonomous phase.
      */
-    public void runOpMode(){}
+    private IdealBot bot = new IdealBot();
+
+    public void runOpMode()
+    {
+        bot.init(hardwareMap);
+        while(getColor.interpretColor(bot.bottomSensor.red(), bot.bottomSensor.blue()) != Color.RED)
+        {
+            bot.slide.setPower(-0.5);
+        }
+        bot.slide.setPower(0);
+    }
 }

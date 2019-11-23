@@ -25,8 +25,7 @@ public class IdealBot extends org.firstinspires.ftc.teamcode.team4348.bot.Bot
 
     //sensors
     public ADAFruitIMU imu;
-    public ColorSensor rSensor;
-    public ColorSensor lSensor;
+    public ColorSensor bottomSensor;
 
     //Servos
     public Servo clamp;
@@ -53,5 +52,6 @@ public class IdealBot extends org.firstinspires.ftc.teamcode.team4348.bot.Bot
         slide.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
         lift = hardware.dcMotor.get("lift");
         clamp = hardware.servo.get("clamp");
+        bottomSensor = hardwareMap.colorSensor.get("cSensor");
     }
 }

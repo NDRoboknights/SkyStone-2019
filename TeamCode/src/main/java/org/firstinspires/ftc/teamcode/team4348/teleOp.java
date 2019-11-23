@@ -4,7 +4,6 @@ import com.qualcomm.robotcore.eventloop.opmode.OpMode;
 import com.qualcomm.robotcore.eventloop.opmode.TeleOp;
 
 import org.firstinspires.ftc.teamcode.team4348.bot.IdealBot;
-import org.firstinspires.ftc.teamcode.team4348.utils.Utilities;
 
 /**
  * This is the teleOp class. This is where your bot variable will go to access hardware.
@@ -64,7 +63,9 @@ public class teleOp extends OpMode
         {
             bot.slide.setPower(gamepad1.right_stick_x);
         }else{
-            bot.slide.setPower(0);
+            bot.slide.setPower(0
+
+            );
         }
 
         if(gamepad1.dpad_up)

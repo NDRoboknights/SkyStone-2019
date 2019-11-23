@@ -20,49 +20,21 @@ public class getColor
         bot.init(hardwareMap);
     }
 
-    //color enum
-    public Color rightColor;
-    public Color leftColor;
+    public int getRed(){return bot.bottomSensor.red();}
+    public int getBlue(){return bot.bottomSensor.blue();}
+    public int getGreen(){return bot.bottomSensor.green();}
 
-    //gets color values
-    public int getRightBlue(){return bot.rSensor.blue();}
-    public int getRightRed(){return bot.rSensor.red();}
-    public int getRightGreen(){return bot.rSensor.green();}
-    public int getLeftRed(){return bot.lSensor.red();}
-    public int getLeftBlue(){return bot.lSensor.blue();}
-    public int getLeftGreen(){return bot.lSensor.green();}
-
-    public Color rightColor()
+    public static Color interpretColor(int r, int b)
     {
-        if(getRightBlue() > 20 && getRightRed() > 50 && getRightGreen() > 50 && getRightRed()-getRightBlue()>15)
+        if(r-b > 500)
         {
-            rightColor = Color.GOLD;
-            return rightColor;
-        }
-        if (getLeftRed() > 80 && getLeftBlue() > 80 && getRightGreen() > 80)
+            return Color.RED;
+        }else if( b-r > 500)
         {
-            leftColor = Color.WHITE;
-            return rightColor;
+            return Color.BLUE;
         }else{
-            rightColor = Color.UNKNOWN;
-            return rightColor;
+            return Color.UNKNOWN;
         }
-    }
 
-    public Color leftColor()
-    {
-        if (getLeftRed() > 80 && getLeftBlue() > 80 && getRightGreen() > 80) {
-            leftColor = Color.WHITE;
-            return leftColor;
-        }
-        if(getLeftBlue() > 20 && getLeftRed() > 50 && getLeftGreen() > 50 && getLeftRed()-getLeftBlue()>15)
-        {
-            leftColor = Color.GOLD;
-            return leftColor;
-        }else
-        {
-            leftColor = Color.UNKNOWN;
-            return leftColor;
-        }
     }
 }

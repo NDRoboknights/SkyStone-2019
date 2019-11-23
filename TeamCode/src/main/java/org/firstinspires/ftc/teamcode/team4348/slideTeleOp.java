@@ -43,12 +43,17 @@ public class slideTeleOp extends OpMode
 
         if(Math.abs(rStick)>stickThresh)
         {
-            bot.lMotor.setPower(lStick);
             bot.rMotor.setPower(-lStick);
         }else
             {
-                bot.lMotor.setPower(0);
                 bot.rMotor.setPower(0);
+        }
+
+        if(Math.abs(lStick)>stickThresh)
+        {
+            bot.lMotor.setPower(lStick);
+        }else{
+            bot.lMotor.setPower(0);
         }
 
 
@@ -60,7 +65,7 @@ public class slideTeleOp extends OpMode
             bot.slide.setPower(0);
         }
 
-        telemetry.addData("Nick Chung: ", true);
+        telemetry.addData("Nick Chung gone: ", true);
         telemetry.update();
     }
 }

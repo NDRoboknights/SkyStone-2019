@@ -41,26 +41,22 @@ public class driveTele extends OpMode
         double lStick = -gamepad1.left_stick_y;
         double rStick = gamepad1.right_stick_x;
 
-        if(Math.abs(rStick)>stickThresh)
+        if(Math.abs(lStick)>stickThresh)
         {
             bot.lMotor.setPower(lStick);
-            bot.rMotor.setPower(-lStick);
         }else
             {
                 bot.lMotor.setPower(0);
-                bot.rMotor.setPower(0);
         }
-
 
         if(Math.abs(rStick)>stickThresh)
         {
-            bot.slide.setPower(rStick);
-        }else
-            {
-            bot.slide.setPower(0);
+            bot.rMotor.setPower(rStick);
+        }else{
+            bot.rMotor.setPower(0);
         }
 
-        telemetry.addData("Nick Chung: ", true);
+        telemetry.addData("Nick Chung gone: ", true);
         telemetry.update();
     }
 }
