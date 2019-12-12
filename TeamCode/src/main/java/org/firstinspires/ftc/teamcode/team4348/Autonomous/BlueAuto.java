@@ -6,6 +6,7 @@ import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
 
 import org.firstinspires.ftc.teamcode.team4348.Enums.Color;
 import org.firstinspires.ftc.teamcode.team4348.bot.IdealBot;
+import org.firstinspires.ftc.teamcode.team4348.utils.Utilities;
 import org.firstinspires.ftc.teamcode.team4348.utils.getColor;
 
 /**
@@ -18,17 +19,22 @@ import org.firstinspires.ftc.teamcode.team4348.utils.getColor;
 public class BlueAuto extends LinearOpMode
 {
     private IdealBot bot = new IdealBot();
+
+
     /**
      * This is the function where all of your code should go for it to affect the bot during the autonomous phase.
      */
 
+
+
     public void runOpMode()
     {
         bot.init(hardwareMap);
-        while(getColor.interpretColor(bot.bottomSensor.red(), bot.bottomSensor.blue()) != Color.BLUE)
-        {
-            bot.slide.setPower(0.5);
-        }
-        bot.slide.setPower(0);
+        waitForStart();
+        bot.lMotor.setPower(1);
+        bot.rMotor.setPower(-1);
+        Utilities.delay(625);
+        bot.lMotor.setPower(0);
+        bot.rMotor.setPower(0);
     }
 }

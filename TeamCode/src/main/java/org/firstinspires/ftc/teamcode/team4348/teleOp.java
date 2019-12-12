@@ -1,5 +1,7 @@
 package org.firstinspires.ftc.teamcode.team4348;
 
+import android.os.Build;
+
 import com.qualcomm.robotcore.eventloop.opmode.OpMode;
 import com.qualcomm.robotcore.eventloop.opmode.TeleOp;
 
@@ -28,7 +30,8 @@ public class teleOp extends OpMode
     public void init()
     {
         bot.init(hardwareMap);
-        bot.clamp.setPosition(0.0);
+        bot.rClamp.setPosition(0);
+        bot.lClamp.setPosition(0);
     }
 
     /**
@@ -38,58 +41,52 @@ public class teleOp extends OpMode
 
     public void loop()
     {
-        double lStick = -gamepad1.left_stick_y;
-        double rStick = gamepad1.right_stick_y;
+        double lStick1 = -gamepad1.left_stick_y;
+        double rStick1 = gamepad1.right_stick_y;
 
-        if(Math.abs(lStick)>stickThresh)
+        double lStick2 = -gamepad2.left_stick_y;
+        double rStick2 = gamepad2.right_stick_y;
+
+        if(Math.abs(lStick1)>stickThresh)
         {
-            bot.lMotor.setPower(lStick);
-            bot.rMotor.setPower(-lStick);
+            bot.lMotor.setPower(lStick1);
         }else
             {
                 bot.lMotor.setPower(0);
         }
 
 
-        if(Math.abs(rStick)>stickThresh)
+        if(Math.abs(rStick1)>stickThresh)
         {
-            bot.rMotor.setPower(rStick);
+            bot.rMotor.setPower(rStick1);
         }else
             {
             bot.rMotor.setPower(0);
         }
 
-        if(Math.abs(gamepad1.right_stick_x)>stickThresh)
+        if(Math.abs(rStick2) > stickThresh)
         {
-            bot.slide.setPower(gamepad1.right_stick_x);
-        }else{
-            bot.slide.setPower(0
-
-            );
+            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {
+                bot.lLift.setTargetPosition((10 + Math.toIntExact((bot.lLift.getCurrentPosition() * Math.round(rStick2)))));
+                bot.rLift.setTargetPosition((10 + Math.toIntExact((bot.lLift.getCurrentPosition() * Math.round(rStick2)))));
+            }else{
+                telemetry.addData("Stick fail: ", true);
+            }
         }
 
-        if(gamepad1.dpad_up)
+        if(gamepad2.x)
         {
-            bot.lift.setPower(-1);
-        }else{
-            bot.lift.setPower(0);
+            bot.lClamp.setPosition(1);
+            bot.rClamp.setPosition(1);
         }
 
-        if(gamepad1.dpad_down){
-            bot.lift.setPower(1);
-        }else{
-            bot.lift.setPower(0);
-        }
-
-        if(gamepad1.x)
+        if(gamepad2.b)
         {
-            bot.clamp.setPosition(1);
+            bot.lClamp.setPosition(0);
+            bot.rClamp.setPosition(0);
         }
 
-        if(gamepad1.b)
-        {
-            bot.clamp.setPosition(0);
-        }
+        telemetry.update();
     }
 }
 

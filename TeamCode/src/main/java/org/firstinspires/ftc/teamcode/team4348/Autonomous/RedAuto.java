@@ -25,6 +25,7 @@ public class RedAuto extends LinearOpMode
     public void runOpMode()
     {
         bot.init(hardwareMap);
+        waitForStart();
         while(getColor.interpretColor(bot.bottomSensor.red(), bot.bottomSensor.blue()) != Color.RED)
         {
             bot.slide.setPower(-0.5);
