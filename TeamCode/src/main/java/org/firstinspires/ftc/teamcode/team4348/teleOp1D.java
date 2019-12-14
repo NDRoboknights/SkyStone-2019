@@ -1,22 +1,20 @@
 package org.firstinspires.ftc.teamcode.team4348;
 
-import android.os.Build;
-
 import com.qualcomm.robotcore.eventloop.opmode.OpMode;
 import com.qualcomm.robotcore.eventloop.opmode.TeleOp;
 
 import org.firstinspires.ftc.teamcode.team4348.bot.IdealBot;
 
 /**
- * This is the teleOp class. This is where your bot variable will go to access hardware.
+ * This is the teleOp2D class. This is where your bot variable will go to access hardware.
  * The init function is called first. It is mostly used to reset the bot from the autonomous phase.
  * You will also use gamepads to program input in the loop function.
  * The loop function is then called. Use of telemetry is highly recommended so you know what's happening with the bot.
  * If you would like samples, check FTCRobotController>src>main>java>...>external.samples
  * There you will find well documented sample pieces of code showing general form.
  */
-@TeleOp(name="TeleOp")
-public class teleOp extends OpMode
+@TeleOp(name="1DTeleOp")
+public class teleOp1D extends OpMode
 {
     //IdealBot used as a container for all the bot hardware
     private IdealBot bot = new IdealBot();
@@ -30,8 +28,7 @@ public class teleOp extends OpMode
     public void init()
     {
         bot.init(hardwareMap);
-        bot.rClamp.setPosition(0);
-        bot.lClamp.setPosition(0);
+        bot.lClamp.setPosition(0.05);
     }
 
     /**
@@ -66,27 +63,26 @@ public class teleOp extends OpMode
 
         if(Math.abs(rStick2) > stickThresh)
         {
-            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {
-                bot.lLift.setTargetPosition((10 + Math.toIntExact((bot.lLift.getCurrentPosition() * Math.round(rStick2)))));
-                bot.rLift.setTargetPosition((10 + Math.toIntExact((bot.lLift.getCurrentPosition() * Math.round(rStick2)))));
-            }else{
-                telemetry.addData("Stick fail: ", true);
-            }
+            bot.lLift.setPower(rStick2 * 0.5);
+            bot.rLift.setPower(-rStick2 * 0.5);
+        }else {
+            bot.rLift.setPower(0);
+            bot.lLift.setPower(0);
         }
 
         if(gamepad2.x)
         {
-            bot.lClamp.setPosition(1);
-            bot.rClamp.setPosition(1);
+            bot.lClamp.setPosition(0.8);
         }
 
         if(gamepad2.b)
         {
-            bot.lClamp.setPosition(0);
-            bot.rClamp.setPosition(0);
+            bot.lClamp.setPosition(0.05);
         }
 
+        telemetry.addData("IMU Value: ", bot.imu.normalizeValue(bot.imu.getValue()));
         telemetry.update();
+
     }
 }
 

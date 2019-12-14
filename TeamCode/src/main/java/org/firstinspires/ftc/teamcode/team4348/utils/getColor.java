@@ -1,9 +1,9 @@
 package org.firstinspires.ftc.teamcode.team4348.utils;
 
-import com.qualcomm.robotcore.hardware.HardwareMap;
+import com.qualcomm.robotcore.hardware.ColorSensor;
 
 import org.firstinspires.ftc.teamcode.team4348.Enums.Color;
-import org.firstinspires.ftc.teamcode.team4348.bot.IdealBot;
+
 
 /**
  * This class is a color sensing class designed to make getting the color of an object very easy.
@@ -11,19 +11,27 @@ import org.firstinspires.ftc.teamcode.team4348.bot.IdealBot;
  */
 public class getColor
 {
-    //bot instantiator
-    public IdealBot bot;
 
-    public getColor(HardwareMap hardwareMap)
+    private ColorSensor cSensor;
+
+    public getColor(ColorSensor colorSensor)
     {
-        bot = new IdealBot();
-        bot.init(hardwareMap);
+        this.cSensor = colorSensor;
     }
 
-    public int getRed(){return bot.bottomSensor.red();}
-    public int getBlue(){return bot.bottomSensor.blue();}
-    public int getGreen(){return bot.bottomSensor.green();}
+    public int getRed(){return cSensor.red();}
+    public int getBlue(){return cSensor.blue();}
+    public int getGreen(){return cSensor.green();}
 
+    public double[] argb()
+    {
+        double[] argb = new double[4];
+        argb[0] = cSensor.alpha();
+        argb[1] = getRed();
+        argb[2] = getBlue();
+        argb[3] = getGreen();
+        return argb;
+    }
     public static Color interpretColor(int r, int b)
     {
         if(r-b > 500)

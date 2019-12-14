@@ -1,10 +1,11 @@
 package org.firstinspires.ftc.teamcode.team4348;
 
+import android.os.Build;
+
 import com.qualcomm.robotcore.eventloop.opmode.OpMode;
 import com.qualcomm.robotcore.eventloop.opmode.TeleOp;
 
-import org.firstinspires.ftc.teamcode.team4348.bot.TestDriveBot;
-import org.firstinspires.ftc.teamcode.team4348.bot.TestSlideBot;
+import org.firstinspires.ftc.teamcode.team4348.bot.IdealBot;
 
 /**
  * This is the teleOp2D class. This is where your bot variable will go to access hardware.
@@ -14,11 +15,11 @@ import org.firstinspires.ftc.teamcode.team4348.bot.TestSlideBot;
  * If you would like samples, check FTCRobotController>src>main>java>...>external.samples
  * There you will find well documented sample pieces of code showing general form.
  */
-@TeleOp(name="DriveTele")
-public class driveTele extends OpMode
+@TeleOp(name="2DTeleOp")
+public class teleOp2D extends OpMode
 {
     //IdealBot used as a container for all the bot hardware
-    private TestDriveBot bot = new TestDriveBot();
+    private IdealBot bot = new IdealBot();
 
     private static final double stickThresh = 0.125;
     /**
@@ -29,6 +30,7 @@ public class driveTele extends OpMode
     public void init()
     {
         bot.init(hardwareMap);
+        bot.lClamp.setPosition(0.);
     }
 
     /**
@@ -38,26 +40,71 @@ public class driveTele extends OpMode
 
     public void loop()
     {
-        double lStick = -gamepad1.left_stick_y;
-        double rStick = gamepad1.right_stick_x;
+        double lStick1 = -gamepad1.left_stick_y;
+        double rStick1 = gamepad1.right_stick_y;
 
-        if(Math.abs(lStick)>stickThresh)
+
+        if(Math.abs(lStick1)>stickThresh)
         {
-            bot.lMotor.setPower(lStick);
+            bot.lMotor.setPower(lStick1);
         }else
             {
                 bot.lMotor.setPower(0);
         }
 
-        if(Math.abs(rStick)>stickThresh)
+
+        if(Math.abs(rStick1)>stickThresh)
         {
-            bot.rMotor.setPower(rStick);
-        }else{
+            bot.rMotor.setPower(rStick1);
+        }else
+            {
             bot.rMotor.setPower(0);
         }
 
-        telemetry.addData("Nick Chung gone: ", true);
+        if(gamepad1.dpad_up)
+        {
+            bot.lLift.setPower(0.75);
+            bot.rLift.setPower(-0.75);
+        }else {
+            bot.rLift.setPower(0);
+            bot.lLift.setPower(0);
+        }
+
+        if(gamepad1.dpad_down)
+        {
+            bot.lLift.setPower(-0.75);
+            bot.rLift.setPower(0.75);
+        }else {
+            bot.rLift.setPower(0);
+            bot.lLift.setPower(0);
+        }
+
+        if(gamepad1.right_bumper)
+        {
+            bot.slide.setPower(-1);
+        }else{
+            bot.slide.setPower(0);
+        }
+        if(gamepad1.left_bumper)
+        {
+            bot.slide.setPower(1);
+        }else{
+            bot.slide.setPower(0);
+        }
+
+        if(gamepad1.x)
+        {
+            bot.lClamp.setPosition(0.8);
+        }
+
+        if(gamepad1.b)
+        {
+            bot.lClamp.setPosition(0);
+        }
+
+        telemetry.addData("IMU Value: ", bot.imu.normalizeValue(bot.imu.getValue()));
         telemetry.update();
+
     }
 }
 

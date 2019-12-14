@@ -1,5 +1,6 @@
 package org.firstinspires.ftc.teamcode.team4348.bot;
 
+import com.qualcomm.hardware.bosch.BNO055IMU;
 import com.qualcomm.robotcore.hardware.ColorSensor;
 import com.qualcomm.robotcore.hardware.DcMotor;
 import com.qualcomm.robotcore.hardware.HardwareMap;
@@ -34,8 +35,8 @@ public class IdealBot extends org.firstinspires.ftc.teamcode.team4348.bot.Bot
     public ADAFruitIMU imu;
     public ColorSensor bottomSensor;
 
+
     //Servos
-    public Servo rClamp;
     public Servo lClamp;
 
     //constructor
@@ -63,16 +64,16 @@ public class IdealBot extends org.firstinspires.ftc.teamcode.team4348.bot.Bot
         slide.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
 
         lLift = hardwareMap.dcMotor.get("lLift");
-        lLift.setMode(DcMotor.RunMode.RUN_TO_POSITION);
+        //lLift.setMode(DcMotor.RunMode.RUN_TO_POSITION);
         lLift.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
         rLift = hardwareMap.dcMotor.get("rLift");
-        rLift.setMode(DcMotor.RunMode.RUN_TO_POSITION);
+        //rLift.setMode(DcMotor.RunMode.RUN_TO_POSITION);
         rLift.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
 
-        rClamp = hardware.servo.get("lClamp");
-        lClamp = hardwareMap.servo.get("rClamp");
+        lClamp = hardware.servo.get("lClamp");
 
         bottomSensor = hardwareMap.colorSensor.get("cSensor");
 
+        imu = new ADAFruitIMU(hardwareMap, "imu");
     }
 }

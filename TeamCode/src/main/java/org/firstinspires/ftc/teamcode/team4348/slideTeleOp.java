@@ -7,7 +7,7 @@ import org.firstinspires.ftc.teamcode.team4348.bot.IdealBot;
 import org.firstinspires.ftc.teamcode.team4348.bot.TestSlideBot;
 
 /**
- * This is the teleOp class. This is where your bot variable will go to access hardware.
+ * This is the teleOp2D class. This is where your bot variable will go to access hardware.
  * The init function is called first. It is mostly used to reset the bot from the autonomous phase.
  * You will also use gamepads to program input in the loop function.
  * The loop function is then called. Use of telemetry is highly recommended so you know what's happening with the bot.
