@@ -1,7 +1,8 @@
 package org.firstinspires.ftc.teamcode.team4348.bot;
 
+import com.qualcomm.hardware.bosch.BNO055IMU;
 import com.qualcomm.robotcore.hardware.ColorSensor;
-import com.qualcomm.robotcore.hardware.DcMotor;
+import com.qualcomm.robotcore.hardware.DcMotorEx;
 import com.qualcomm.robotcore.hardware.HardwareMap;
 import com.qualcomm.robotcore.hardware.Servo;
 
@@ -18,17 +19,17 @@ public class IdealBot extends org.firstinspires.ftc.teamcode.team4348.bot.Bot
 
     /** BOT HARDWARE **/
     //motors
-    public DcMotor lMotor;
-    public DcMotor rMotor;
-    public DcMotor slide;
-    public DcMotor rLift;
-    public DcMotor lLift;
+    public DcMotorEx lMotor;
+    public DcMotorEx rMotor;
+    public DcMotorEx slide;
+    public DcMotorEx rLift;
+    public DcMotorEx lLift;
 
 
     //dummy motors just used for encoders for odometry
-    public DcMotor lMotorDummy;
-    public DcMotor rMotorDummy;
-    public DcMotor slideDummy;
+    public DcMotorEx lMotorDummy;
+    public DcMotorEx rMotorDummy;
+    public DcMotorEx slideDummy;
 
     //sensors
     public ADAFruitIMU imu;
@@ -52,27 +53,31 @@ public class IdealBot extends org.firstinspires.ftc.teamcode.team4348.bot.Bot
         this.hardware = hardwareMap;
 
         //motors, all set to use encoders
-        rMotor = hardware.dcMotor.get("rMotor");
-        rMotor.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
-        rMotor.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
-        lMotor = hardware.dcMotor.get("lMotor");
-        lMotor.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
-        lMotor.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
-        slide = hardware.dcMotor.get("slide");
-        slide.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
-        slide.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
+        rMotor = hardware.get(DcMotorEx.class, "rMotor");
+        rMotor.setMode(DcMotorEx.RunMode.RUN_USING_ENCODER);
+        rMotor.setZeroPowerBehavior(DcMotorEx.ZeroPowerBehavior.BRAKE);
+        lMotor = hardware.get(DcMotorEx.class, "lMotor");
+        lMotor.setMode(DcMotorEx.RunMode.RUN_USING_ENCODER);
+        lMotor.setZeroPowerBehavior(DcMotorEx.ZeroPowerBehavior.BRAKE);
+        slide = hardware.get(DcMotorEx.class, "slide");
+        slide.setMode(DcMotorEx.RunMode.RUN_USING_ENCODER);
+        slide.setZeroPowerBehavior(DcMotorEx.ZeroPowerBehavior.BRAKE);
 
-        lLift = hardwareMap.dcMotor.get("lLift");
-        //lLift.setMode(DcMotor.RunMode.RUN_TO_POSITION);
-        lLift.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
-        rLift = hardwareMap.dcMotor.get("rLift");
-        //rLift.setMode(DcMotor.RunMode.RUN_TO_POSITION);
-        rLift.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
+        lLift = hardware.get(DcMotorEx.class, "lLift");
+        //lLift.setMode(DcMotorEx.RunMode.RUN_TO_POSITION);
+        lLift.setZeroPowerBehavior(DcMotorEx.ZeroPowerBehavior.BRAKE);
+        rLift = hardware.get(DcMotorEx.class, "rLift");
+        //rLift.setMode(DcMotorEx.RunMode.RUN_TO_POSITION);
+        rLift.setZeroPowerBehavior(DcMotorEx.ZeroPowerBehavior.BRAKE);
 
         lClamp = hardware.servo.get("lClamp");
 
         bottomSensor = hardwareMap.colorSensor.get("cSensor");
 
-        //imu = new ADAFruitIMU(hardwareMap, "imu");
+    }
+
+    public void resetAllEnc()
+    {
+
     }
 }
