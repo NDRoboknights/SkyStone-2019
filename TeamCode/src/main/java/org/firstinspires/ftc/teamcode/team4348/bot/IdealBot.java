@@ -1,12 +1,11 @@
 package org.firstinspires.ftc.teamcode.team4348.bot;
 
-import com.qualcomm.hardware.bosch.BNO055IMU;
 import com.qualcomm.robotcore.hardware.ColorSensor;
 import com.qualcomm.robotcore.hardware.DcMotor;
 import com.qualcomm.robotcore.hardware.HardwareMap;
 import com.qualcomm.robotcore.hardware.Servo;
 
-import org.firstinspires.ftc.teamcode.team4348.PID.ADAFruitIMU;
+import org.firstinspires.ftc.teamcode.team4348.PID.legacy.ADAFruitIMU;
 
 /**
  * This class contains all the variables corresponding to the hardware on the robot.
@@ -74,6 +73,6 @@ public class IdealBot extends org.firstinspires.ftc.teamcode.team4348.bot.Bot
 
         bottomSensor = hardwareMap.colorSensor.get("cSensor");
 
-        imu = new ADAFruitIMU(hardwareMap, "imu");
+        //imu = new ADAFruitIMU(hardwareMap, "imu");
     }
 }

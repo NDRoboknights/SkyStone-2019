@@ -9,12 +9,12 @@ import org.firstinspires.ftc.teamcode.team4348.Enums.Color;
  * This class is a color sensing class designed to make getting the color of an object very easy.
  * It returns enums, and has relatively easy use, however will require tuning based on sensor used and the color looking to be sensed.
  */
-public class getColor
+public class GetColor
 {
 
     private ColorSensor cSensor;
 
-    public getColor(ColorSensor colorSensor)
+    public GetColor(ColorSensor colorSensor)
     {
         this.cSensor = colorSensor;
     }

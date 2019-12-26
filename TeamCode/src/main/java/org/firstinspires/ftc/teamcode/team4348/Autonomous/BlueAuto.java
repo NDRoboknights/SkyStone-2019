@@ -7,7 +7,7 @@ import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
 import org.firstinspires.ftc.teamcode.team4348.Enums.Color;
 import org.firstinspires.ftc.teamcode.team4348.bot.IdealBot;
 import org.firstinspires.ftc.teamcode.team4348.utils.Utilities;
-import org.firstinspires.ftc.teamcode.team4348.utils.getColor;
+import org.firstinspires.ftc.teamcode.team4348.utils.GetColor;
 
 /**
  * This class is the blue alliance autonomous. It consists of just the function runOpMode.
@@ -33,7 +33,7 @@ public class BlueAuto extends LinearOpMode
         waitForStart();
         bot.lMotor.setPower(1);
         bot.rMotor.setPower(-1);
-        Utilities.delay(625);
+        Utilities.delay(1000);
         bot.lMotor.setPower(0);
         bot.rMotor.setPower(0);
     }

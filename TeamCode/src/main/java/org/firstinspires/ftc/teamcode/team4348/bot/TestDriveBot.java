@@ -4,7 +4,7 @@ import com.qualcomm.robotcore.hardware.ColorSensor;
 import com.qualcomm.robotcore.hardware.DcMotor;
 import com.qualcomm.robotcore.hardware.HardwareMap;
 
-import org.firstinspires.ftc.teamcode.team4348.PID.ADAFruitIMU;
+import org.firstinspires.ftc.teamcode.team4348.PID.legacy.ADAFruitIMU;
 
 /**
  * This class contains all the variables corresponding to the hardware on the robot.

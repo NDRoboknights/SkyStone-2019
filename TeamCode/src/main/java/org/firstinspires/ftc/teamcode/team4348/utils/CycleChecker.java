@@ -1,6 +1,6 @@
 package org.firstinspires.ftc.teamcode.team4348.utils;
 
-import org.firstinspires.ftc.teamcode.team4348.PID.PIDFunctions;
+import org.firstinspires.ftc.teamcode.team4348.PID.legacy.PIDFunctions;
 
 /**
  * Created by sambl on 12/3/2017.

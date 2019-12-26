@@ -1,4 +1,4 @@
-package org.firstinspires.ftc.teamcode.team4348;
+package org.firstinspires.ftc.teamcode.team4348.teleOp;
 
 import android.os.Build;
 
@@ -43,6 +43,7 @@ public class teleOp2D extends OpMode
         double lStick1 = -gamepad1.left_stick_y;
         double rStick1 = gamepad1.right_stick_y;
 
+        double rStick2 = gamepad2.right_stick_y;
 
         if(Math.abs(lStick1)>stickThresh)
         {
@@ -61,19 +62,10 @@ public class teleOp2D extends OpMode
             bot.rMotor.setPower(0);
         }
 
-        if(gamepad1.dpad_up)
+        if(Math.abs(rStick2) > stickThresh)
         {
-            bot.lLift.setPower(0.75);
-            bot.rLift.setPower(-0.75);
-        }else {
-            bot.rLift.setPower(0);
-            bot.lLift.setPower(0);
-        }
-
-        if(gamepad1.dpad_down)
-        {
-            bot.lLift.setPower(-0.75);
-            bot.rLift.setPower(0.75);
+            bot.lLift.setPower(-rStick2);
+            bot.rLift.setPower(rStick2);
         }else {
             bot.rLift.setPower(0);
             bot.lLift.setPower(0);
@@ -92,18 +84,18 @@ public class teleOp2D extends OpMode
             bot.slide.setPower(0);
         }
 
-        if(gamepad1.x)
+        if(gamepad2.x)
         {
             bot.lClamp.setPosition(0.8);
         }
 
-        if(gamepad1.b)
+        if(gamepad2.b)
         {
             bot.lClamp.setPosition(0);
         }
 
-        telemetry.addData("IMU Value: ", bot.imu.normalizeValue(bot.imu.getValue()));
-        telemetry.update();
+        //telemetry.addData("IMU Value: ", bot.imu.normalizeValue(bot.imu.getValue()));
+        //telemetry.update();
 
     }
 }
