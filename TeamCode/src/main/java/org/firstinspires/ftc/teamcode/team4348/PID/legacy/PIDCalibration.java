@@ -16,7 +16,7 @@ import java.util.concurrent.TimeUnit;
 public class PIDCalibration extends CustomAutonomous
 {
     IdealBot bot = new IdealBot();
-    ADAFruitIMU imu = bot.imu;
+    ADAFruitIMU imu = bot.imu2;
     PIDController pidController;
     final double THRESHOLD = 0.5;
     final double DELTA_VAL = 0.001;

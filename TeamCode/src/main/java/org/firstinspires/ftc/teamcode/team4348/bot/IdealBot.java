@@ -2,11 +2,13 @@ package org.firstinspires.ftc.teamcode.team4348.bot;
 
 import com.qualcomm.hardware.bosch.BNO055IMU;
 import com.qualcomm.robotcore.hardware.ColorSensor;
+import com.qualcomm.robotcore.hardware.DcMotor;
 import com.qualcomm.robotcore.hardware.DcMotorEx;
 import com.qualcomm.robotcore.hardware.HardwareMap;
 import com.qualcomm.robotcore.hardware.Servo;
 
 import org.firstinspires.ftc.teamcode.team4348.PID.legacy.ADAFruitIMU;
+import org.firstinspires.ftc.teamcode.team4348.PID.legacy.REVHubIMU;
 
 /**
  * This class contains all the variables corresponding to the hardware on the robot.
@@ -32,13 +34,13 @@ public class IdealBot extends org.firstinspires.ftc.teamcode.team4348.bot.Bot
     public DcMotorEx slideDummy;
 
     //sensors
-    public ADAFruitIMU imu;
+    public REVHubIMU imu;
+    public ADAFruitIMU imu2;
     public ColorSensor bottomSensor;
 
 
     //Servos
     public Servo lClamp;
-
     //constructor
     public IdealBot()
     {
@@ -78,6 +80,11 @@ public class IdealBot extends org.firstinspires.ftc.teamcode.team4348.bot.Bot
 
     public void resetAllEnc()
     {
+        rLift.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
+        lLift.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
 
+        rMotor.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
+        lMotor.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
+        slide.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
     }
 }

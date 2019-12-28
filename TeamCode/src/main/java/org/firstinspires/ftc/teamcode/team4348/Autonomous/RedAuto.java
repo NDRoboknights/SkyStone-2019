@@ -5,7 +5,7 @@ import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
 
 import org.firstinspires.ftc.teamcode.team4348.Enums.Color;
 import org.firstinspires.ftc.teamcode.team4348.bot.IdealBot;
-import org.firstinspires.ftc.teamcode.team4348.utils.getColor;
+import org.firstinspires.ftc.teamcode.team4348.utils.GetColor;
 
 
 /**
@@ -26,7 +26,7 @@ public class RedAuto extends LinearOpMode
     {
         bot.init(hardwareMap);
         waitForStart();
-        while(getColor.interpretColor(bot.bottomSensor.red(), bot.bottomSensor.blue()) != Color.RED)
+        while(GetColor.interpretColor(bot.bottomSensor.red(), bot.bottomSensor.blue()) != Color.RED)
         {
             bot.slide.setPower(-0.5);
         }
