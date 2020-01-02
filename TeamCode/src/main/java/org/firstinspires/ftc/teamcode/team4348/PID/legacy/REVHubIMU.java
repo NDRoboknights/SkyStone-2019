@@ -1,5 +1,6 @@
 package org.firstinspires.ftc.teamcode.team4348.PID.legacy;
 
+import com.qualcomm.hardware.adafruit.AdafruitBNO055IMU;
 import com.qualcomm.hardware.bosch.BNO055IMU;
 import com.qualcomm.hardware.bosch.JustLoggingAccelerationIntegrator;
 import com.qualcomm.robotcore.hardware.HardwareMap;
@@ -12,8 +13,9 @@ public class REVHubIMU extends PIDInput
 {
     private BNO055IMU imu;
 
-    public REVHubIMU(HardwareMap hMap, String name)
+    public REVHubIMU(HardwareMap hMap, String name, BNO055IMU imu)
     {
+        this.imu = imu;
         BNO055IMU.Parameters parameters = new BNO055IMU.Parameters();
         parameters.angleUnit           = BNO055IMU.AngleUnit.DEGREES;
         parameters.accelUnit           = BNO055IMU.AccelUnit.METERS_PERSEC_PERSEC;
@@ -21,6 +23,9 @@ public class REVHubIMU extends PIDInput
         parameters.loggingEnabled      = true;
         parameters.loggingTag          = "IMU";
         parameters.accelerationIntegrationAlgorithm = new JustLoggingAccelerationIntegrator();
+
+        this.imu = hMap.get(BNO055IMU.class, name);
+        this.imu.initialize(parameters);
     }
 
     /**

@@ -34,6 +34,7 @@ public class IdealBot extends org.firstinspires.ftc.teamcode.team4348.bot.Bot
     public DcMotorEx slideDummy;
 
     //sensors
+    private BNO055IMU revimu;
     public REVHubIMU imu;
     public ADAFruitIMU imu2;
     public ColorSensor bottomSensor;
@@ -75,7 +76,7 @@ public class IdealBot extends org.firstinspires.ftc.teamcode.team4348.bot.Bot
         lClamp = hardware.servo.get("lClamp");
 
         bottomSensor = hardwareMap.colorSensor.get("cSensor");
-
+        imu = new REVHubIMU(hardwareMap, "imu", revimu);
     }
 
     public void resetAllEnc()

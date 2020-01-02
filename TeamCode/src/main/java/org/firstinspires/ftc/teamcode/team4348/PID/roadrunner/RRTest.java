@@ -1,5 +1,6 @@
 package org.firstinspires.ftc.teamcode.team4348.PID.roadrunner;
 
+
 import com.acmerobotics.roadrunner.control.PIDCoefficients;
 import com.acmerobotics.roadrunner.control.PIDFController;
 import com.qualcomm.robotcore.eventloop.opmode.OpMode;
@@ -30,6 +31,9 @@ public class RRTest extends OpMode
         telemetry.addData("imu x: ", bot.imu.getXAxisValue());
         telemetry.addData("imu y: ", bot.imu.getYAxisValue());
         telemetry.addData("imu z: ", bot.imu.getZAxisValue());
+        telemetry.addData("p: ", kp);
+        telemetry.addData("i: ", ki);
+        telemetry.addData("d: ", kd);
         telemetry.update();
     }
 }
