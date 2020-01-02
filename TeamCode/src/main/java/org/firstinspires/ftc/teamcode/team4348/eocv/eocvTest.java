@@ -24,7 +24,7 @@ public class eocvTest extends OpMode
 
         camera.openCameraDevice();
 
-        camera.setPipeline(new OpenCvTrackerApiPipeline());
+        camera.setPipeline(new NaivePointSampleSkystoneDetectionPipeline());
 
         camera.startStreaming(320, 240, OpenCvCameraRotation.UPRIGHT);
 
