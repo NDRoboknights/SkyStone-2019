@@ -12,7 +12,7 @@ public class FollowerPIDTuner extends LinearOpMode
     @Override
     public void runOpMode() throws InterruptedException
     {
-        HDrive drive = new HDrive(hardwareMap);
+        HDrive drive = new HDrive(hardwareMap, new Pose2d(0,0,0));
 
         drive.setPoseEstimate(new Pose2d(-DISTANCE / 2, -DISTANCE / 2, 0));
 

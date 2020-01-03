@@ -23,7 +23,7 @@ import static org.firstinspires.ftc.teamcode.team4348.PID.roadrunner.drive.Drive
 public class HDrive extends HDriveBase
 {
     public IdealBot bot = new IdealBot();
-    private HDriveLocalizer localizer = new HDriveLocalizer();
+    private HDriveLocalizer localizer;
 
     @NotNull
     @Override
@@ -54,11 +54,19 @@ public class HDrive extends HDriveBase
 
     public class HDriveLocalizer extends ThreeTrackingWheelLocalizer implements Localizer
     {
-        ThreeTrackingWheelLocalizer localizer;
 
-        HDriveLocalizer()
+        HDriveLocalizer(Pose2d pose2d)
         {
             super(Arrays.asList(new Pose2d(0,7,0), new Pose2d(0, -7, 0), new Pose2d( 13.5, 0, Math.toRadians(90))));
+
+            ThreeTrackingWheelLocalizer localizer = new ThreeTrackingWheelLocalizer(Arrays.asList(pose2d)) {
+                @NotNull
+                @Override
+                public List<Double> getWheelPositions() {
+                    return Arrays.asList(encoderTicksToInches(bot.lMotorDummy.getCurrentPosition()), encoderTicksToInches(bot.rMotorDummy.getCurrentPosition()*-1), encoderTicksToInches(bot.slideDummy.getCurrentPosition()));
+
+                }
+            };
         }
 
 
@@ -111,10 +119,11 @@ public class HDrive extends HDriveBase
         setDrivePower(driveSignal.getVel());
     }
 
-    public HDrive(@NotNull HardwareMap hardwareMap)
+    public HDrive(@NotNull HardwareMap hardwareMap, @NotNull Pose2d startPose)
     {
         super();
         bot.init(hardwareMap);
+        localizer = new HDriveLocalizer(startPose);
         setLocalizer(localizer);
     }
 
