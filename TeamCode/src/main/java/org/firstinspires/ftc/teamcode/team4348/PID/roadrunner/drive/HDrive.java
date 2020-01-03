@@ -1,7 +1,6 @@
 package org.firstinspires.ftc.teamcode.team4348.PID.roadrunner.drive;
 
 import com.acmerobotics.roadrunner.control.PIDCoefficients;
-import com.acmerobotics.roadrunner.drive.Drive;
 import com.acmerobotics.roadrunner.drive.DriveSignal;
 import com.acmerobotics.roadrunner.geometry.Pose2d;
 import com.acmerobotics.roadrunner.localization.Localizer;
@@ -26,6 +25,7 @@ public class HDrive extends HDriveBase
     private IdealBot bot = new IdealBot();
     private HDriveLocalizer localizer = new HDriveLocalizer();
 
+    @NotNull
     @Override
     public Localizer getLocalizer()
     {
@@ -33,7 +33,7 @@ public class HDrive extends HDriveBase
     }
 
     @Override
-    public void setLocalizer(Localizer localizer)
+    public void setLocalizer(@NotNull Localizer localizer)
     {
         this.localizer = (HDriveLocalizer) localizer;
     }
@@ -45,8 +45,8 @@ public class HDrive extends HDriveBase
     }
 
     @Deprecated
-    /**
-     * does nothing. resolves errors.
+    /*
+      does nothing. resolves errors.
      */
     public void setMotorPowers(double v, double v1, double v2, double v3) {
 
@@ -136,6 +136,7 @@ public class HDrive extends HDriveBase
         ));
     }
 
+    @NotNull
     public List<Double> getWheelPositions(){ return localizer.getWheelPositions();}
 }
 
