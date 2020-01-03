@@ -60,7 +60,7 @@ public abstract class HDriveBase extends MecanumDrive
     private List<Double> lastWheelPositions;
     private double lastTimestamp;
 
-    public HDriveBase(HardwareMap hardwareMap)
+    public HDriveBase()
     {
         super(kV, kA, kStatic, TRACK_WIDTH);
 

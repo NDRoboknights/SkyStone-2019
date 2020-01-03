@@ -27,8 +27,8 @@ public class RedAuto extends LinearOpMode
      * This is the function where all of your code should go for it to affect the bot during the autonomous phase.
      */
 
-    HDrive drive = new HDrive(hardwareMap);
-    IdealBot bot = new IdealBot();
+    private HDrive drive = new HDrive(hardwareMap);
+    private IdealBot bot = new IdealBot();
     public void runOpMode()
     {
         bot.init(hardwareMap);

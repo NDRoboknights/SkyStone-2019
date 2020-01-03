@@ -111,9 +111,9 @@ public class HDrive extends HDriveBase
         setDrivePower(driveSignal.getVel());
     }
 
-    public HDrive(HardwareMap hardwareMap)
+    public HDrive(@NotNull HardwareMap hardwareMap)
     {
-        super(hardwareMap);
+        super();
         bot.init(hardwareMap);
         setLocalizer(localizer);
     }

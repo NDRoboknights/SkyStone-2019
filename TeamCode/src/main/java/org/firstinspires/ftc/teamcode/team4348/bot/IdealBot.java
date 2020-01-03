@@ -10,6 +10,7 @@ import com.qualcomm.robotcore.hardware.Servo;
 
 import org.firstinspires.ftc.teamcode.team4348.PID.legacy.ADAFruitIMU;
 import org.firstinspires.ftc.teamcode.team4348.PID.legacy.REVHubIMU;
+import org.jetbrains.annotations.NotNull;
 
 /**
  * This class contains all the variables corresponding to the hardware on the robot.
@@ -52,10 +53,8 @@ public class IdealBot extends org.firstinspires.ftc.teamcode.team4348.bot.Bot
     }
 
     //initializing hardware
-    public void init(HardwareMap hardwareMap)
+    public void init(@NotNull HardwareMap hardwareMap)
     {
-
-        //motors, all set to use encoders
         rMotor = hardwareMap.get(DcMotorEx.class, "rMotor");
         rMotor.setMode(DcMotorEx.RunMode.RUN_USING_ENCODER);
         rMotor.setZeroPowerBehavior(DcMotorEx.ZeroPowerBehavior.BRAKE);
