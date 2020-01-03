@@ -1,6 +1,6 @@
 package org.firstinspires.ftc.teamcode.team4348.PID.legacy;
 
-import com.qualcomm.hardware.adafruit.AdafruitBNO055IMU;
+
 import com.qualcomm.hardware.bosch.BNO055IMU;
 import com.qualcomm.hardware.bosch.JustLoggingAccelerationIntegrator;
 import com.qualcomm.robotcore.hardware.HardwareMap;

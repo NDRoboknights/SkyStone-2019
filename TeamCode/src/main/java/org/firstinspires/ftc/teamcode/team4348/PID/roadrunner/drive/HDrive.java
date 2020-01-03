@@ -1,11 +1,14 @@
 package org.firstinspires.ftc.teamcode.team4348.PID.roadrunner.drive;
 
+import com.acmerobotics.roadrunner.control.PIDCoefficients;
 import com.acmerobotics.roadrunner.drive.Drive;
 import com.acmerobotics.roadrunner.drive.DriveSignal;
 import com.acmerobotics.roadrunner.geometry.Pose2d;
 import com.acmerobotics.roadrunner.localization.Localizer;
 import com.acmerobotics.roadrunner.localization.ThreeTrackingWheelLocalizer;
+import com.qualcomm.robotcore.hardware.DcMotor;
 import com.qualcomm.robotcore.hardware.HardwareMap;
+import com.qualcomm.robotcore.hardware.PIDFCoefficients;
 
 
 import org.firstinspires.ftc.teamcode.team4348.Autonomous.CustomAutonomous;
@@ -15,11 +18,13 @@ import org.jetbrains.annotations.NotNull;
 import java.util.Arrays;
 import java.util.List;
 
+import static org.firstinspires.ftc.teamcode.team4348.PID.roadrunner.drive.DriveConstants.getMotorVelocityF;
 
-public class HDrive extends Drive
+
+public class HDrive extends HDriveBase
 {
     private IdealBot bot = new IdealBot();
-    private Localizer localizer = new HDriveLocalizer();
+    private HDriveLocalizer localizer = new HDriveLocalizer();
 
     @Override
     public Localizer getLocalizer()
@@ -30,7 +35,7 @@ public class HDrive extends Drive
     @Override
     public void setLocalizer(Localizer localizer)
     {
-        this.localizer = localizer;
+        this.localizer = (HDriveLocalizer) localizer;
     }
 
     @Override
@@ -39,7 +44,15 @@ public class HDrive extends Drive
         return Math.toRadians(bot.imu.getZAxisValue());
     }
 
-    class HDriveLocalizer extends ThreeTrackingWheelLocalizer
+    @Deprecated
+    /**
+     * does nothing. resolves errors.
+     */
+    public void setMotorPowers(double v, double v1, double v2, double v3) {
+
+    }
+
+    public class HDriveLocalizer extends ThreeTrackingWheelLocalizer implements Localizer
     {
         ThreeTrackingWheelLocalizer localizer;
 
@@ -75,14 +88,14 @@ public class HDrive extends Drive
         @NotNull
         @Override
         public List<Double> getWheelPositions() {
-            return Arrays.asList(encoderTicksToInches(bot.lMotorDummy.getCurrentPosition()), encoderTicksToInches(bot.rMotorDummy.getCurrentPosition()), encoderTicksToInches(bot.slideDummy.getCurrentPosition()));
+            return Arrays.asList(encoderTicksToInches(bot.lMotorDummy.getCurrentPosition()), encoderTicksToInches(bot.rMotorDummy.getCurrentPosition()*-1), encoderTicksToInches(bot.slideDummy.getCurrentPosition()));
         }
     }
     @Override
     public void setDrivePower(Pose2d pose2d)
     {
         Pose2d xPos = new Pose2d(pose2d.getX(), 0, pose2d.getHeading());
-        Pose2d yPos = new Pose2d(0, pose2d.getY(), pose2d.getHeading());
+        Pose2d yPos = new Pose2d(0, pose2d.getY(), 0);
 
         List<Double> xPow = TankKinematics.robotToWheelVelocities(xPos, 14);
         List<Double> yPow = TankKinematics.robotToWheelAccelerations(yPos, 14);
@@ -100,9 +113,29 @@ public class HDrive extends Drive
 
     public HDrive(HardwareMap hardwareMap)
     {
+        super(hardwareMap);
         bot.init(hardwareMap);
         setLocalizer(localizer);
     }
 
+    public PIDCoefficients getPIDCoefficients(DcMotor.RunMode runMode)
+    {
+        PIDFCoefficients coefficients = bot.lMotor.getPIDFCoefficients(runMode);
+        return new PIDCoefficients(coefficients.p, coefficients.i, coefficients.d);
+    }
+
+    public void setPIDCoefficients(DcMotor.RunMode runMode, PIDCoefficients coefficients) {
+        bot.lMotor.setPIDFCoefficients(runMode, new PIDFCoefficients(
+                coefficients.kP, coefficients.kI, coefficients.kD, getMotorVelocityF()
+        ));
+        bot.rMotor.setPIDFCoefficients(runMode, new PIDFCoefficients(
+                coefficients.kP, coefficients.kI, coefficients.kD, getMotorVelocityF()
+        ));
+        bot.slide.setPIDFCoefficients(runMode, new PIDFCoefficients(
+                coefficients.kP, coefficients.kI, coefficients.kD, getMotorVelocityF()
+        ));
+    }
+
+    public List<Double> getWheelPositions(){ return localizer.getWheelPositions();}
 }
 

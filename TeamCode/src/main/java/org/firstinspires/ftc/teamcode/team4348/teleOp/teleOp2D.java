@@ -40,10 +40,10 @@ public class teleOp2D extends OpMode
 
     public void loop()
     {
-        double lStick1 = -gamepad1.left_stick_y;
-        double rStick1 = gamepad1.right_stick_y;
+        double lStick1 = -gamepad1.left_stick_y * 0.75;
+        double rStick1 = gamepad1.right_stick_y * 0.75;
 
-        double rStick2 = gamepad2.right_stick_y;
+        double rStick2 = gamepad2.right_stick_y * 0.75;
 
         if(Math.abs(lStick1)>stickThresh)
         {

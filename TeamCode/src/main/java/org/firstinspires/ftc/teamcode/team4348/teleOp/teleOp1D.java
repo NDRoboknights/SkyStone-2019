@@ -38,8 +38,8 @@ public class teleOp1D extends OpMode
 
     public void loop()
     {
-        double lStick1 = -gamepad1.left_stick_y;
-        double rStick1 = gamepad1.right_stick_y;
+        double lStick1 = -gamepad1.left_stick_y * 0.75;
+        double rStick1 = gamepad1.right_stick_y * 0.75;
 
 
         if(Math.abs(lStick1)>stickThresh)
@@ -100,11 +100,21 @@ public class teleOp1D extends OpMode
             bot.lClamp.setPosition(0);
         }
 
-        //telemetry.addData("IMU Value: ", bot.imu.normalizeValue(bot.imu.getValue()));
-        //
-        //
-        //
-        // telemetry.update();
+        if(gamepad1.y)
+        {
+            bot.lFound.setPosition(0.3);
+            bot.rFound.setPosition(0.7);
+        }
+
+        if(gamepad1.a)
+        {
+            bot.rFound.setPosition(0);
+            bot.lFound.setPosition(0.9);
+        }
+
+        telemetry.addData("IMU Value: ", bot.imu.normalizeValue(bot.imu.getZAxisValue()));
+
+         telemetry.update();
 
     }
 }

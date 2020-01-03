@@ -4,6 +4,7 @@ import com.qualcomm.hardware.bosch.BNO055IMU;
 import com.qualcomm.robotcore.hardware.ColorSensor;
 import com.qualcomm.robotcore.hardware.DcMotor;
 import com.qualcomm.robotcore.hardware.DcMotorEx;
+import com.qualcomm.robotcore.hardware.DcMotorSimple;
 import com.qualcomm.robotcore.hardware.HardwareMap;
 import com.qualcomm.robotcore.hardware.Servo;
 
@@ -42,6 +43,8 @@ public class IdealBot extends org.firstinspires.ftc.teamcode.team4348.bot.Bot
 
     //Servos
     public Servo lClamp;
+    public Servo lFound;
+    public Servo rFound;
     //constructor
     public IdealBot()
     {
@@ -61,6 +64,7 @@ public class IdealBot extends org.firstinspires.ftc.teamcode.team4348.bot.Bot
         rMotor.setZeroPowerBehavior(DcMotorEx.ZeroPowerBehavior.BRAKE);
         lMotor = hardware.get(DcMotorEx.class, "lMotor");
         lMotor.setMode(DcMotorEx.RunMode.RUN_USING_ENCODER);
+        lMotor.setDirection(DcMotorSimple.Direction.REVERSE);
         lMotor.setZeroPowerBehavior(DcMotorEx.ZeroPowerBehavior.BRAKE);
         slide = hardware.get(DcMotorEx.class, "slide");
         slide.setMode(DcMotorEx.RunMode.RUN_USING_ENCODER);
@@ -74,6 +78,13 @@ public class IdealBot extends org.firstinspires.ftc.teamcode.team4348.bot.Bot
         rLift.setZeroPowerBehavior(DcMotorEx.ZeroPowerBehavior.BRAKE);
 
         lClamp = hardware.servo.get("lClamp");
+        lFound = hardwareMap.servo.get("lFound");
+        rFound = hardwareMap.servo.get("rFound");
+
+        lMotorDummy = hardwareMap.get(DcMotorEx.class, "lOdo");
+        rMotorDummy = hardwareMap.get(DcMotorEx.class, "rOdo");
+        slideDummy = hardwareMap.get(DcMotorEx.class, "sOdo");
+
 
         bottomSensor = hardwareMap.colorSensor.get("cSensor");
         imu = new REVHubIMU(hardwareMap, "imu", revimu);
@@ -87,5 +98,9 @@ public class IdealBot extends org.firstinspires.ftc.teamcode.team4348.bot.Bot
         rMotor.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
         lMotor.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
         slide.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
+
+        rMotorDummy.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
+        lMotorDummy.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
+        slideDummy.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
     }
 }
