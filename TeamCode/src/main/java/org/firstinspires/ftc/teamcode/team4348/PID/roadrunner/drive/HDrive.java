@@ -55,11 +55,11 @@ public class HDrive extends HDriveBase
     public class HDriveLocalizer extends ThreeTrackingWheelLocalizer implements Localizer
     {
 
-        HDriveLocalizer(Pose2d pose2d)
+        HDriveLocalizer()
         {
             super(Arrays.asList(new Pose2d(0,7,0), new Pose2d(0, -7, 0), new Pose2d( 13.5, 0, Math.toRadians(90))));
 
-            ThreeTrackingWheelLocalizer localizer = new ThreeTrackingWheelLocalizer(Arrays.asList(pose2d)) {
+            ThreeTrackingWheelLocalizer localizer = new ThreeTrackingWheelLocalizer(Arrays.asList(new Pose2d(0,7,0), new Pose2d(0, -7, 0), new Pose2d( 13.5, 0, Math.toRadians(90)))) {
                 @NotNull
                 @Override
                 public List<Double> getWheelPositions() {
@@ -119,11 +119,11 @@ public class HDrive extends HDriveBase
         setDrivePower(driveSignal.getVel());
     }
 
-    public HDrive(@NotNull HardwareMap hardwareMap, @NotNull Pose2d startPose)
+    public HDrive(@NotNull HardwareMap hardwareMap)
     {
         super();
         bot.init(hardwareMap);
-        localizer = new HDriveLocalizer(startPose);
+        localizer = new HDriveLocalizer();
         setLocalizer(localizer);
     }
 

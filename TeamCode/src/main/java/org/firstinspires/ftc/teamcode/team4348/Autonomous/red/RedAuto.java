@@ -30,7 +30,7 @@ public class RedAuto extends LinearOpMode
     private IdealBot bot = new IdealBot();
     public void runOpMode()
     {
-        HDrive drive = new HDrive(hardwareMap, new Pose2d(40, -24, 0));
+        HDrive drive = new HDrive(hardwareMap);
         bot.init(hardwareMap);
         drive.setPoseEstimate(new Pose2d(40, -24, 0));
         waitForStart();
