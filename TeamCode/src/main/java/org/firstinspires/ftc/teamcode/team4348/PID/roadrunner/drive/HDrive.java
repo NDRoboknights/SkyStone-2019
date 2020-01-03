@@ -22,7 +22,7 @@ import static org.firstinspires.ftc.teamcode.team4348.PID.roadrunner.drive.Drive
 
 public class HDrive extends HDriveBase
 {
-    private IdealBot bot = new IdealBot();
+    public IdealBot bot = new IdealBot();
     private HDriveLocalizer localizer = new HDriveLocalizer();
 
     @NotNull
@@ -139,4 +139,3 @@ public class HDrive extends HDriveBase
     @NotNull
     public List<Double> getWheelPositions(){ return localizer.getWheelPositions();}
 }
-

@@ -5,10 +5,8 @@ import com.acmerobotics.dashboard.canvas.Canvas;
 import com.acmerobotics.dashboard.telemetry.TelemetryPacket;
 import com.acmerobotics.roadrunner.control.PIDCoefficients;
 import com.acmerobotics.roadrunner.control.PIDFController;
-import com.acmerobotics.roadrunner.drive.Drive;
 import com.acmerobotics.roadrunner.drive.DriveSignal;
 import com.acmerobotics.roadrunner.drive.MecanumDrive;
-import com.acmerobotics.roadrunner.drive.TankDrive;
 import com.acmerobotics.roadrunner.followers.HolonomicPIDVAFollower;
 import com.acmerobotics.roadrunner.followers.TrajectoryFollower;
 import com.acmerobotics.roadrunner.geometry.Pose2d;
@@ -23,16 +21,13 @@ import com.acmerobotics.roadrunner.util.NanoClock;
 import com.qualcomm.robotcore.hardware.DcMotor;
 import com.qualcomm.robotcore.hardware.HardwareMap;
 
-import org.firstinspires.ftc.teamcode.team4348.bot.IdealBot;
 import org.firstinspires.ftc.teamcode.team4348.utils.DashboardUtil;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 
 import static org.firstinspires.ftc.teamcode.team4348.PID.roadrunner.drive.DriveConstants.BASE_CONSTRAINTS;
 import static org.firstinspires.ftc.teamcode.team4348.PID.roadrunner.drive.DriveConstants.TRACK_WIDTH;
-import static org.firstinspires.ftc.teamcode.team4348.PID.roadrunner.drive.DriveConstants.encoderTicksToInches;
 import static org.firstinspires.ftc.teamcode.team4348.PID.roadrunner.drive.DriveConstants.kA;
 import static org.firstinspires.ftc.teamcode.team4348.PID.roadrunner.drive.DriveConstants.kStatic;
 import static org.firstinspires.ftc.teamcode.team4348.PID.roadrunner.drive.DriveConstants.kV;
@@ -40,7 +35,6 @@ import static org.firstinspires.ftc.teamcode.team4348.PID.roadrunner.drive.Drive
 public abstract class HDriveBase extends MecanumDrive
 {
 
-    private IdealBot bot = new IdealBot();
     public static PIDCoefficients TRANSLATIONAL_PID = new PIDCoefficients(0, 0, 0);
     public static PIDCoefficients HEADING_PID = new PIDCoefficients(0, 0, 0);
 
@@ -69,7 +63,6 @@ public abstract class HDriveBase extends MecanumDrive
     public HDriveBase(HardwareMap hardwareMap)
     {
         super(kV, kA, kStatic, TRACK_WIDTH);
-        bot.init(hardwareMap);
 
         dashboard = FtcDashboard.getInstance();
         dashboard.setTelemetryTransmissionInterval(25);
@@ -204,13 +197,13 @@ public abstract class HDriveBase extends MecanumDrive
         dashboard.sendTelemetryPacket(packet);
     }
 
-    public void waitForIdle() {
+    private void waitForIdle() {
         while (!Thread.currentThread().isInterrupted() && isBusy()) {
             update();
         }
     }
 
-    public boolean isBusy() {
+    private boolean isBusy() {
         return mode != Mode.IDLE;
     }
 
@@ -236,9 +229,6 @@ public abstract class HDriveBase extends MecanumDrive
         return velocities;
     }
 
-    public List<Double> getWheelPositions() {
-        return Arrays.asList(encoderTicksToInches(bot.lMotorDummy.getCurrentPosition()), encoderTicksToInches(bot.rMotorDummy.getCurrentPosition()*-1), encoderTicksToInches(bot.slideDummy.getCurrentPosition()));
-    }
     public abstract PIDCoefficients getPIDCoefficients(DcMotor.RunMode runMode);
 
     public abstract void setPIDCoefficients(DcMotor.RunMode runMode, PIDCoefficients coefficients);

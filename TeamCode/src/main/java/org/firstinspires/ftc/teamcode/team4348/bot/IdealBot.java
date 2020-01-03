@@ -18,8 +18,6 @@ import org.firstinspires.ftc.teamcode.team4348.PID.legacy.REVHubIMU;
 public class IdealBot extends org.firstinspires.ftc.teamcode.team4348.bot.Bot
 {
 
-    private HardwareMap hardware;
-
     /** BOT HARDWARE **/
     //motors
     public DcMotorEx lMotor;
@@ -30,9 +28,9 @@ public class IdealBot extends org.firstinspires.ftc.teamcode.team4348.bot.Bot
 
 
     //dummy motors just used for encoders for odometry
-    public DcMotorEx lMotorDummy;
-    public DcMotorEx rMotorDummy;
-    public DcMotorEx slideDummy;
+    public DcMotor lMotorDummy;
+    public DcMotor rMotorDummy;
+    public DcMotor slideDummy;
 
     //sensors
     private BNO055IMU revimu;
@@ -56,34 +54,34 @@ public class IdealBot extends org.firstinspires.ftc.teamcode.team4348.bot.Bot
     //initializing hardware
     public void init(HardwareMap hardwareMap)
     {
-        this.hardware = hardwareMap;
 
         //motors, all set to use encoders
-        rMotor = hardware.get(DcMotorEx.class, "rMotor");
+        rMotor = hardwareMap.get(DcMotorEx.class, "rMotor");
         rMotor.setMode(DcMotorEx.RunMode.RUN_USING_ENCODER);
         rMotor.setZeroPowerBehavior(DcMotorEx.ZeroPowerBehavior.BRAKE);
-        lMotor = hardware.get(DcMotorEx.class, "lMotor");
+
+        lMotor = hardwareMap.get(DcMotorEx.class, "lMotor");
         lMotor.setMode(DcMotorEx.RunMode.RUN_USING_ENCODER);
         lMotor.setDirection(DcMotorSimple.Direction.REVERSE);
         lMotor.setZeroPowerBehavior(DcMotorEx.ZeroPowerBehavior.BRAKE);
-        slide = hardware.get(DcMotorEx.class, "slide");
+
+        slide = hardwareMap.get(DcMotorEx.class, "slide");
         slide.setMode(DcMotorEx.RunMode.RUN_USING_ENCODER);
         slide.setZeroPowerBehavior(DcMotorEx.ZeroPowerBehavior.BRAKE);
 
-        lLift = hardware.get(DcMotorEx.class, "lLift");
-        //lLift.setMode(DcMotorEx.RunMode.RUN_TO_POSITION);
+        lLift = hardwareMap.get(DcMotorEx.class, "lLift");
         lLift.setZeroPowerBehavior(DcMotorEx.ZeroPowerBehavior.BRAKE);
-        rLift = hardware.get(DcMotorEx.class, "rLift");
-        //rLift.setMode(DcMotorEx.RunMode.RUN_TO_POSITION);
+
+        rLift = hardwareMap.get(DcMotorEx.class, "rLift");
         rLift.setZeroPowerBehavior(DcMotorEx.ZeroPowerBehavior.BRAKE);
 
-        lClamp = hardware.servo.get("lClamp");
+        lClamp = hardwareMap.servo.get("lClamp");
         lFound = hardwareMap.servo.get("lFound");
         rFound = hardwareMap.servo.get("rFound");
 
-        lMotorDummy = hardwareMap.get(DcMotorEx.class, "lOdo");
-        rMotorDummy = hardwareMap.get(DcMotorEx.class, "rOdo");
-        slideDummy = hardwareMap.get(DcMotorEx.class, "sOdo");
+        lMotorDummy = hardwareMap.dcMotor.get("lOdo");
+        rMotorDummy = hardwareMap.dcMotor.get("rOdo");
+        slideDummy = hardwareMap.dcMotor.get("sOdo");
 
 
         bottomSensor = hardwareMap.colorSensor.get("cSensor");
@@ -92,12 +90,12 @@ public class IdealBot extends org.firstinspires.ftc.teamcode.team4348.bot.Bot
 
     public void resetAllEnc()
     {
-        rLift.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
-        lLift.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
+        rLift.setMode(DcMotorEx.RunMode.STOP_AND_RESET_ENCODER);
+        lLift.setMode(DcMotorEx.RunMode.STOP_AND_RESET_ENCODER);
 
-        rMotor.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
-        lMotor.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
-        slide.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
+        rMotor.setMode(DcMotorEx.RunMode.STOP_AND_RESET_ENCODER);
+        lMotor.setMode(DcMotorEx.RunMode.STOP_AND_RESET_ENCODER);
+        slide.setMode(DcMotorEx.RunMode.STOP_AND_RESET_ENCODER);
 
         rMotorDummy.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
         lMotorDummy.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
