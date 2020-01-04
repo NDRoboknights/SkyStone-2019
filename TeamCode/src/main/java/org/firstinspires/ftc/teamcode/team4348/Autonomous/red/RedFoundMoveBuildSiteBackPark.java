@@ -20,8 +20,8 @@ import kotlin.jvm.functions.Function0;
  * This will later be filled to make the robot complete autonomous function.
  * Your bot variable goes in this class to access hardware.
  */
-@Autonomous(name="RedFoundMoveBuildSite")
-public class RedAuto extends LinearOpMode
+@Autonomous(name="RedFoundMoveBuildSiteBackPark")
+public class RedFoundMoveBuildSiteBackPark extends LinearOpMode
 {
     /**
      * This is the function where all of your code should go for it to affect the bot during the autonomous phase.

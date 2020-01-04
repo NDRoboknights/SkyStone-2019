@@ -54,12 +54,13 @@ public class HDrive extends HDriveBase
 
     public class HDriveLocalizer extends ThreeTrackingWheelLocalizer implements Localizer
     {
+        ThreeTrackingWheelLocalizer twLocalizer;
 
-        HDriveLocalizer()
+        HDriveLocalizer(List<Pose2d> threeWheelOdo)
         {
-            super(Arrays.asList(new Pose2d(0,7,0), new Pose2d(0, -7, 0), new Pose2d( 13.5, 0, Math.toRadians(90))));
+            super(threeWheelOdo);
 
-            ThreeTrackingWheelLocalizer localizer = new ThreeTrackingWheelLocalizer(Arrays.asList(new Pose2d(0,7,0), new Pose2d(0, -7, 0), new Pose2d( 13.5, 0, Math.toRadians(90)))) {
+             twLocalizer = new ThreeTrackingWheelLocalizer(threeWheelOdo) {
                 @NotNull
                 @Override
                 public List<Double> getWheelPositions() {
@@ -73,19 +74,19 @@ public class HDrive extends HDriveBase
         @NotNull
         @Override
         public Pose2d getPoseEstimate() {
-            return localizer.getPoseEstimate();
+            return twLocalizer.getPoseEstimate();
         }
 
         @Override
         public void setPoseEstimate(@NotNull Pose2d pose2d)
         {
-            localizer.setPoseEstimate(pose2d);
+            twLocalizer.setPoseEstimate(pose2d);
         }
 
         @Override
         public void update()
         {
-            localizer.update();
+            twLocalizer.update();
         }
 
         double encoderTicksToInches(int ticks)
@@ -123,7 +124,7 @@ public class HDrive extends HDriveBase
     {
         super();
         bot.init(hardwareMap);
-        localizer = new HDriveLocalizer();
+        localizer = new HDriveLocalizer(Arrays.asList(new Pose2d(0,7,0), new Pose2d(0, -7, 0), new Pose2d( 13.5, 0, Math.toRadians(90))));
         setLocalizer(localizer);
     }
 
