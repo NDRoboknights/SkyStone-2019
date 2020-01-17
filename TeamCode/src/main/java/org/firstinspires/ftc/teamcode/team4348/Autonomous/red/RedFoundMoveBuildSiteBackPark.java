@@ -46,7 +46,7 @@ public class RedFoundMoveBuildSiteBackPark extends LinearOpMode
                         return Unit.INSTANCE;
                 }
                 })
-                                .splineTo(new Pose2d(40, -70, 0))
+                                .splineTo(new Pose2d(40, -52, 0))
                                 .addMarker(new Function0<Unit>() {
                                     @Override
                                     public Unit invoke()
@@ -56,7 +56,7 @@ public class RedFoundMoveBuildSiteBackPark extends LinearOpMode
                                         return Unit.INSTANCE;
                                     }
                                 })
-                                .splineTo(new Pose2d(0, -70, 0)).build()
+                                .splineTo(new Pose2d(0, -52, 0)).build()
                 );
     }
 }

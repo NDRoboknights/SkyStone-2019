@@ -2,6 +2,7 @@ package org.firstinspires.ftc.teamcode.team4348.teleOp;
 
 import com.qualcomm.robotcore.eventloop.opmode.OpMode;
 import com.qualcomm.robotcore.eventloop.opmode.TeleOp;
+import com.qualcomm.robotcore.hardware.DcMotorSimple;
 
 import org.firstinspires.ftc.teamcode.team4348.bot.IdealBot;
 
@@ -28,6 +29,7 @@ public class teleOp1D extends OpMode
     public void init()
     {
         bot.init(hardwareMap);
+        bot.lMotor.setDirection(DcMotorSimple.Direction.REVERSE);
         bot.lClamp.setPosition(0);
     }
 
@@ -38,8 +40,8 @@ public class teleOp1D extends OpMode
 
     public void loop()
     {
-        double lStick1 = -gamepad1.left_stick_y * 0.75;
-        double rStick1 = gamepad1.right_stick_y * 0.75;
+        double lStick1 = gamepad1.left_stick_y * 0.55;
+        double rStick1 = gamepad1.right_stick_y * 0.55;
 
 
         if(Math.abs(lStick1)>stickThresh)
@@ -77,15 +79,16 @@ public class teleOp1D extends OpMode
             bot.lLift.setPower(0);
         }
 
-        if(gamepad1.right_bumper)
+        if(Math.abs(gamepad1.left_stick_x) > stickThresh)
         {
-            bot.slide.setPower(-1);
+            bot.slide.setPower(gamepad1.left_stick_x);
         }else{
             bot.slide.setPower(0);
+
         }
-        if(gamepad1.left_bumper)
+        if(Math.abs(gamepad1.left_stick_x) > stickThresh)
         {
-            bot.slide.setPower(1);
+            bot.slide.setPower(gamepad1.left_stick_x);
         }else{
             bot.slide.setPower(0);
         }
@@ -112,7 +115,7 @@ public class teleOp1D extends OpMode
             bot.lFound.setPosition(0.9);
         }
 
-        telemetry.addData("IMU Value: ", bot.imu.normalizeValue(bot.imu.getZAxisValue()));
+        telemetry.addData("Heading: ", bot.imu.normalizeValue(bot.imu.getZAxisValue()));
 
          telemetry.update();
 

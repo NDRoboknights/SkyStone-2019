@@ -16,15 +16,15 @@ public class RedFoundMoveFrontPark extends LinearOpMode
     private IdealBot bot;
 
     @Override
-    public void runOpMode() throws InterruptedException
+    public void runOpMode()
     {
         HDrive hDrive = new HDrive(hardwareMap);
         bot = new IdealBot();
         bot.init(hardwareMap);
-        hDrive.setPoseEstimate(new Pose2d(40, -70 ,0));
+        hDrive.setPoseEstimate(new Pose2d(40, -52 ,0));
         waitForStart();
         hDrive.trajectoryBuilder()
-                .splineTo(new Pose2d(40, -24, 0))
+                .forward(28)
                 .addMarker(new Function0<Unit>() {
                     @Override
                     public Unit invoke()
@@ -44,7 +44,7 @@ public class RedFoundMoveFrontPark extends LinearOpMode
                         return Unit.INSTANCE;
                     }
                 })
-                .splineTo(new Pose2d(24, -70, 0))
+                .splineTo(new Pose2d(24, -52, 0))
                 .splineTo(new Pose2d(24, -30,0 ))
                 .splineTo(new Pose2d(0, -30, 0)).build().start();
     }

@@ -4,10 +4,8 @@ package org.firstinspires.ftc.teamcode.team4348.Autonomous.blue;
 import com.qualcomm.robotcore.eventloop.opmode.Autonomous;
 import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
 
-import org.firstinspires.ftc.teamcode.team4348.Enums.Color;
 import org.firstinspires.ftc.teamcode.team4348.bot.IdealBot;
 import org.firstinspires.ftc.teamcode.team4348.utils.Utilities;
-import org.firstinspires.ftc.teamcode.team4348.utils.GetColor;
 
 /**
  * This class is the blue alliance autonomous. It consists of just the function runOpMode.
