@@ -13,7 +13,7 @@ import org.firstinspires.ftc.teamcode.team11683.utils.Utilities;
  * This will later be filled to make the robot complete autonomous function.
  * Your bot variable goes in this class to access hardware.
  */
-@Autonomous(name="BlueAuto")
+@Autonomous(name="JVBlueAuto")
 public class BlueAuto extends LinearOpMode
 {
     private IdealBot bot = new IdealBot();

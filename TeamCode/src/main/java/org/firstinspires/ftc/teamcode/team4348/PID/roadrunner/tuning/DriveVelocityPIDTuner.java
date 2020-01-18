@@ -1,5 +1,4 @@
-package org.firstinspires.ftc.teamcode.team4348.PID.roadrunner.drive;
-
+package org.firstinspires.ftc.teamcode.team4348.PID.roadrunner.tuning;
 import com.acmerobotics.dashboard.FtcDashboard;
 import com.acmerobotics.dashboard.config.Config;
 import com.acmerobotics.dashboard.config.ValueProvider;
@@ -18,10 +17,15 @@ import com.qualcomm.robotcore.hardware.DcMotor;
 import com.qualcomm.robotcore.util.RobotLog;
 
 
+import org.firstinspires.ftc.teamcode.team4348.PID.roadrunner.drive.DriveConstants;
+import org.firstinspires.ftc.teamcode.team4348.PID.roadrunner.drive.HDriveMotorEnc;
+import org.firstinspires.ftc.teamcode.team4348.PID.roadrunner.drive.HDriveODO;
+
 import java.util.List;
 
 import static org.firstinspires.ftc.teamcode.team4348.PID.roadrunner.drive.DriveConstants.RUN_USING_ENCODER;
 import static org.firstinspires.ftc.teamcode.team4348.PID.roadrunner.drive.DriveConstants.kV;
+
 
 /*
  * This routine is designed to tune the PID coefficients used by the REV Expansion Hubs for closed-
@@ -35,9 +39,8 @@ import static org.firstinspires.ftc.teamcode.team4348.PID.roadrunner.drive.Drive
  * ctor.
  */
 @Config
-@Autonomous(group = "drive")
-public class DriveVelocityPIDTuner extends LinearOpMode
-{
+@Autonomous(name ="DriveVelocityPIDTunerMotorEnc", group="drive")
+public class DriveVelocityPIDTuner extends LinearOpMode {
     public static double DISTANCE = 72;
 
     private static final String PID_VAR_NAME = "VELO_PID";
@@ -46,7 +49,7 @@ public class DriveVelocityPIDTuner extends LinearOpMode
     private String catName;
     private CustomVariable catVar;
 
-    private HDrive drive;
+    private HDriveMotorEnc drive;
 
     private static MotionProfile generateProfile(boolean movingForward) {
         MotionState start = new MotionState(movingForward ? 0 : DISTANCE, 0, 0, 0);
@@ -131,7 +134,7 @@ public class DriveVelocityPIDTuner extends LinearOpMode
 
         telemetry = new MultipleTelemetry(telemetry, dashboard.getTelemetry());
 
-        drive = new HDrive(hardwareMap);
+        drive = new HDriveMotorEnc(hardwareMap);
 
         addPidVariable();
 
@@ -165,7 +168,7 @@ public class DriveVelocityPIDTuner extends LinearOpMode
             double targetPower = kV * motionState.getV();
             drive.setDrivePower(new Pose2d(targetPower, 0, 0));
 
-            List<Double> velocities = drive.getWheelPositions();
+            List<Double> velocities = drive.getWheelVelocities();
 
             // update telemetry
             telemetry.addData("targetVelocity", motionState.getV());

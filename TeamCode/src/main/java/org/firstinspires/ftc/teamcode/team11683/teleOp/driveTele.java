@@ -13,7 +13,7 @@ import org.firstinspires.ftc.teamcode.team11683.bot.TestDriveBot;
  * If you would like samples, check FTCRobotController>src>main>java>...>external.samples
  * There you will find well documented sample pieces of code showing general form.
  */
-@TeleOp(name="DriveTele")
+@TeleOp(name="DriveTeleTest")
 public class driveTele extends OpMode
 {
     //IdealBot used as a container for all the bot hardware

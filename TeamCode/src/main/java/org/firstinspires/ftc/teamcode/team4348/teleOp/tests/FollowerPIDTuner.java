@@ -3,7 +3,7 @@ package org.firstinspires.ftc.teamcode.team4348.teleOp.tests;
 import com.acmerobotics.roadrunner.geometry.Pose2d;
 import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
 
-import org.firstinspires.ftc.teamcode.team4348.PID.roadrunner.drive.HDrive;
+import org.firstinspires.ftc.teamcode.team4348.PID.roadrunner.drive.HDriveODO;
 
 public class FollowerPIDTuner extends LinearOpMode
 {
@@ -12,7 +12,7 @@ public class FollowerPIDTuner extends LinearOpMode
     @Override
     public void runOpMode() throws InterruptedException
     {
-        HDrive drive = new HDrive(hardwareMap);
+        HDriveODO drive = new HDriveODO(hardwareMap);
 
         drive.setPoseEstimate(new Pose2d(-DISTANCE / 2, -DISTANCE / 2, 0));
 

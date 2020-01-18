@@ -14,7 +14,7 @@ import org.firstinspires.ftc.teamcode.team11683.bot.IdealBot;
  * If you would like samples, check FTCRobotController>src>main>java>...>external.samples
  * There you will find well documented sample pieces of code showing general form.
  */
-@TeleOp(name="1DTeleOp")
+@TeleOp(name="JV1DTeleOp")
 public class teleOp1D extends OpMode
 {
     //IdealBot used as a container for all the bot hardware

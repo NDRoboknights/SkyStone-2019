@@ -4,7 +4,7 @@ import com.acmerobotics.roadrunner.geometry.Pose2d;
 import com.qualcomm.robotcore.eventloop.opmode.Autonomous;
 import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
 
-import org.firstinspires.ftc.teamcode.team4348.PID.roadrunner.drive.HDrive;
+import org.firstinspires.ftc.teamcode.team4348.PID.roadrunner.drive.HDriveODO;
 import org.firstinspires.ftc.teamcode.team4348.bot.IdealBot;
 
 import kotlin.Unit;
@@ -18,7 +18,7 @@ public class RedFoundMoveFrontPark extends LinearOpMode
     @Override
     public void runOpMode()
     {
-        HDrive hDrive = new HDrive(hardwareMap);
+        HDriveODO hDrive = new HDriveODO(hardwareMap);
         bot = new IdealBot();
         bot.init(hardwareMap);
         hDrive.setPoseEstimate(new Pose2d(40, -52 ,0));

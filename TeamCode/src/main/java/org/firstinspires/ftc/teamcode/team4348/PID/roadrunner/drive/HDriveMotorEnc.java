@@ -9,7 +9,6 @@ import com.qualcomm.robotcore.hardware.DcMotor;
 import com.qualcomm.robotcore.hardware.HardwareMap;
 import com.qualcomm.robotcore.hardware.PIDFCoefficients;
 
-
 import org.firstinspires.ftc.teamcode.team4348.Autonomous.CustomAutonomous;
 import org.firstinspires.ftc.teamcode.team4348.bot.IdealBot;
 import org.jetbrains.annotations.NotNull;
@@ -20,7 +19,7 @@ import java.util.List;
 import static org.firstinspires.ftc.teamcode.team4348.PID.roadrunner.drive.DriveConstants.getMotorVelocityF;
 
 
-public class HDrive extends HDriveBase
+public class HDriveMotorEnc extends HDriveBase
 {
     public IdealBot bot = new IdealBot();
     private HDriveLocalizer localizer;
@@ -64,7 +63,7 @@ public class HDrive extends HDriveBase
                 @NotNull
                 @Override
                 public List<Double> getWheelPositions() {
-                    return Arrays.asList(encoderTicksToInches(bot.lMotorDummy.getCurrentPosition()), encoderTicksToInches(bot.rMotorDummy.getCurrentPosition()*-1), encoderTicksToInches(bot.slideDummy.getCurrentPosition()));
+                    return Arrays.asList(encoderTicksToInches(bot.lMotor.getCurrentPosition()), encoderTicksToInches(bot.rMotor.getCurrentPosition()), encoderTicksToInches(bot.slide.getCurrentPosition()));
 
                 }
             };
@@ -97,7 +96,7 @@ public class HDrive extends HDriveBase
         @NotNull
         @Override
         public List<Double> getWheelPositions() {
-            return Arrays.asList(encoderTicksToInches(bot.lMotorDummy.getCurrentPosition()), encoderTicksToInches(bot.rMotorDummy.getCurrentPosition()*-1), encoderTicksToInches(bot.slideDummy.getCurrentPosition()));
+            return Arrays.asList(encoderTicksToInches(bot.lMotor.getCurrentPosition()), encoderTicksToInches(bot.rMotor.getCurrentPosition()), encoderTicksToInches(bot.slide.getCurrentPosition()));
         }
     }
     @Override
@@ -120,7 +119,7 @@ public class HDrive extends HDriveBase
         setDrivePower(driveSignal.getVel());
     }
 
-    public HDrive(@NotNull HardwareMap hardwareMap)
+    public HDriveMotorEnc(@NotNull HardwareMap hardwareMap)
     {
         super();
         bot.init(hardwareMap);

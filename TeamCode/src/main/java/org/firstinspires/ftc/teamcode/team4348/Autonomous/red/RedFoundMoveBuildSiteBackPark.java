@@ -5,7 +5,7 @@ import com.acmerobotics.roadrunner.geometry.Pose2d;
 import com.qualcomm.robotcore.eventloop.opmode.Autonomous;
 import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
 
-import org.firstinspires.ftc.teamcode.team4348.PID.roadrunner.drive.HDrive;
+import org.firstinspires.ftc.teamcode.team4348.PID.roadrunner.drive.HDriveODO;
 import org.firstinspires.ftc.teamcode.team4348.bot.IdealBot;
 
 
@@ -30,7 +30,7 @@ public class RedFoundMoveBuildSiteBackPark extends LinearOpMode
     private IdealBot bot = new IdealBot();
     public void runOpMode()
     {
-        HDrive drive = new HDrive(hardwareMap);
+        HDriveODO drive = new HDriveODO(hardwareMap);
         bot.init(hardwareMap);
         drive.setPoseEstimate(new Pose2d(40, -24, 0));
         waitForStart();
