@@ -30,7 +30,7 @@ public class teleOp1D extends OpMode
     {
         bot.init(hardwareMap);
         bot.lMotor.setDirection(DcMotorSimple.Direction.REVERSE);
-        bot.clamp.setPosition(0);
+        bot.clamp.setPosition(1);
     }
 
     /**

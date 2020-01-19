@@ -30,7 +30,7 @@ public class teleOp1D extends OpMode
     {
         bot.init(hardwareMap);
         bot.lMotor.setDirection(DcMotorSimple.Direction.REVERSE);
-        bot.lClamp.setPosition(0);
+        bot.lClamp.setPosition(0.2);
     }
 
     /**
@@ -40,13 +40,13 @@ public class teleOp1D extends OpMode
 
     public void loop()
     {
-        double lStick1 = gamepad1.left_stick_y * 0.55;
-        double rStick1 = gamepad1.right_stick_y * 0.55;
+        double lStick1 = gamepad1.left_stick_y;
+        double rStick1 = gamepad1.right_stick_y;
 
 
         if(Math.abs(lStick1)>stickThresh)
         {
-            bot.lMotor.setPower(lStick1);
+            bot.lMotor.setPower(lStick1 * 0.55);
         }else
             {
                 bot.lMotor.setPower(0);
@@ -55,7 +55,7 @@ public class teleOp1D extends OpMode
 
         if(Math.abs(rStick1)>stickThresh)
         {
-            bot.rMotor.setPower(rStick1);
+            bot.rMotor.setPower(rStick1 * 0.55);
         }else
             {
             bot.rMotor.setPower(0);
@@ -63,8 +63,8 @@ public class teleOp1D extends OpMode
 
         if(gamepad1.dpad_up)
         {
-            bot.lLift.setPower(0.75);
-            bot.rLift.setPower(-0.75);
+            bot.lLift.setPower(0.85);
+            bot.rLift.setPower(-0.85);
         }else {
             bot.rLift.setPower(0);
             bot.lLift.setPower(0);
@@ -81,16 +81,10 @@ public class teleOp1D extends OpMode
 
         if(Math.abs(gamepad1.left_stick_x) > stickThresh)
         {
-            bot.slide.setPower(gamepad1.left_stick_x);
+            bot.slide.setPower(gamepad1.left_stick_x * 0.55);
         }else{
             bot.slide.setPower(0);
 
-        }
-        if(Math.abs(gamepad1.left_stick_x) > stickThresh)
-        {
-            bot.slide.setPower(gamepad1.left_stick_x);
-        }else{
-            bot.slide.setPower(0);
         }
 
         if(gamepad1.x)

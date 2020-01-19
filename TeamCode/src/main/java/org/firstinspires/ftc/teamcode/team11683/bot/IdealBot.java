@@ -55,6 +55,9 @@ public class IdealBot extends Bot
         lMotor.setDirection(DcMotorSimple.Direction.REVERSE);
         lMotor.setZeroPowerBehavior(DcMotorEx.ZeroPowerBehavior.BRAKE);
 
+        lift = hardwareMap.get(DcMotorEx.class, "lift");
+
+        clamp = hardwareMap.servo.get("clamp");
 
         imu = new REVHubIMU(hardwareMap, "imu", revimu);
     }

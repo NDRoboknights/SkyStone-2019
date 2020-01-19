@@ -30,8 +30,8 @@ public class BlueAuto extends LinearOpMode
         bot.init(hardwareMap);
         waitForStart();
         bot.lMotor.setPower(1);
-        bot.rMotor.setPower(-1);
-        Utilities.delay(1000);
+        bot.rMotor.setPower(1);
+        Utilities.delay(5000);
         bot.lMotor.setPower(0);
         bot.rMotor.setPower(0);
     }
