@@ -33,16 +33,12 @@ import static org.firstinspires.ftc.teamcode.team4348.PID.roadrunner.drive.Drive
  */
 @Config
 @Autonomous(group = "drive")
-public class DriveFeedforwardTuner extends LinearOpMode {
+public class kATuner extends LinearOpMode {
     public static final double MAX_POWER = 0.7;
     public static final double DISTANCE = 100;
 
     @Override
     public void runOpMode() throws InterruptedException {
-        if (RUN_USING_ENCODER) {
-            RobotLog.setGlobalErrorMsg("Feedforward constants usually don't need to be tuned " +
-                    "when using the built-in drive motor velocity PID.");
-        }
 
         telemetry = new MultipleTelemetry(telemetry, FtcDashboard.getInstance().getTelemetry());
 
@@ -118,7 +114,7 @@ public class DriveFeedforwardTuner extends LinearOpMode {
         telemetry.update();
 
         boolean fitAccelFF = true;
-
+        
         if (fitAccelFF) {
             telemetry.clearAll();
             telemetry.addLine("Place the robot back in its starting position");
@@ -160,8 +156,6 @@ public class DriveFeedforwardTuner extends LinearOpMode {
             telemetry.addLine("Constant power test complete");
             telemetry.addLine(Misc.formatInvariant("kA = %.5f (R^2 = %.2f)",
                     accelResult.kA, accelResult.rSquare));
-            telemetry.addLine(Misc.formatInvariant("kV = %.5f (R^2 = %.2f)",
-                    rampResult.kStatic, rampResult.rSquare));
             telemetry.update();
         }
 

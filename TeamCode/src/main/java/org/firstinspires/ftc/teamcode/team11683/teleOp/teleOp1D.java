@@ -30,7 +30,7 @@ public class teleOp1D extends OpMode
     {
         bot.init(hardwareMap);
         bot.lMotor.setDirection(DcMotorSimple.Direction.REVERSE);
-        bot.clamp.setPosition(1);
+        bot.clamp.setPosition(0.35);
     }
 
     /**
@@ -76,14 +76,12 @@ public class teleOp1D extends OpMode
         }
 
         if(gamepad1.x){
-            bot.clamp.setPosition(1);
+            bot.clamp.setPosition(0.35);
         }
 
         if(gamepad1.b){
             bot.clamp.setPosition(0);
         }
-
-        telemetry.addData("Heading: ", bot.imu.normalizeValue(bot.imu.getYAxisValue()));
 
          telemetry.update();
 

@@ -64,7 +64,7 @@ public class HDriveODO extends HDriveBase
                 @NotNull
                 @Override
                 public List<Double> getWheelPositions() {
-                    return Arrays.asList(encoderTicksToInches(bot.lMotorDummy.getCurrentPosition()), encoderTicksToInches(bot.rMotorDummy.getCurrentPosition()*-1), encoderTicksToInches(bot.slideDummy.getCurrentPosition()));
+                    return Arrays.asList(encoderTicksToInches(bot.lMotorDummy.getCurrentPosition()), encoderTicksToInches(bot.rMotorDummy.getCurrentPosition()*-1), middleEncoderTicksToInches(bot.slideDummy.getCurrentPosition()));
 
                 }
             };
@@ -91,7 +91,12 @@ public class HDriveODO extends HDriveBase
 
         double encoderTicksToInches(int ticks)
         {
-            return 4 * 2 * Math.PI * 1 * ticks / CustomAutonomous.USDIGITAL_E4T_TICKS;
+            return DriveConstants.WHEEL_RADIUS * 2 * Math.PI * 1 * ticks / CustomAutonomous.USDIGITAL_E4T_TICKS;
+        }
+
+        double middleEncoderTicksToInches(int ticks)
+        {
+            return DriveConstants.MIDDLE_WHEEL_RADIUS * 2 * Math.PI * 1 * ticks / CustomAutonomous.USDIGITAL_E4P_TICKS;
         }
 
         @NotNull
@@ -104,14 +109,14 @@ public class HDriveODO extends HDriveBase
     public void setDrivePower(Pose2d pose2d)
     {
         Pose2d xPos = new Pose2d(pose2d.getX(), 0, pose2d.getHeading());
-        Pose2d yPos = new Pose2d(0, pose2d.getY(), 0);
+        Pose2d yPos = new Pose2d(pose2d.getY(), 0, 0);
 
         List<Double> xPow = TankKinematics.robotToWheelVelocities(xPos, 14);
         List<Double> yPow = TankKinematics.robotToWheelAccelerations(yPos, 14);
 
         bot.lMotor.setPower(xPow.get(0));
         bot.rMotor.setPower(xPow.get(1));
-        bot.slide.setPower(yPow.get(0));
+        bot.slide.setPower(yPow.get(1));
     }
 
     @Override

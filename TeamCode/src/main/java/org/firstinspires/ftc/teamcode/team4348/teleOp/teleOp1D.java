@@ -40,8 +40,8 @@ public class teleOp1D extends OpMode
 
     public void loop()
     {
-        double lStick1 = gamepad1.left_stick_y;
-        double rStick1 = gamepad1.right_stick_y;
+        double lStick1 = -gamepad1.left_stick_y;
+        double rStick1 = -gamepad1.right_stick_y;
 
 
         if(Math.abs(lStick1)>stickThresh)
@@ -63,8 +63,8 @@ public class teleOp1D extends OpMode
 
         if(gamepad1.dpad_up)
         {
-            bot.lLift.setPower(0.85);
-            bot.rLift.setPower(-0.85);
+            bot.lLift.setPower(1);
+            bot.rLift.setPower(1);
         }else {
             bot.rLift.setPower(0);
             bot.lLift.setPower(0);
@@ -72,8 +72,8 @@ public class teleOp1D extends OpMode
 
         if(gamepad1.dpad_down)
         {
-            bot.lLift.setPower(-0.5);
-            bot.rLift.setPower(0.5);
+            bot.lLift.setPower(-1);
+            bot.rLift.setPower(-1);
         }else {
             bot.rLift.setPower(0);
             bot.lLift.setPower(0);
@@ -89,12 +89,12 @@ public class teleOp1D extends OpMode
 
         if(gamepad1.x)
         {
-            bot.lClamp.setPosition(0.8);
+            bot.lClamp.setPosition(0.7);
         }
 
         if(gamepad1.b)
         {
-            bot.lClamp.setPosition(0);
+            bot.lClamp.setPosition(0.2);
         }
 
         if(gamepad1.y)

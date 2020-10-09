@@ -1,11 +1,11 @@
-package org.firstinspires.ftc.teamcode.team4348.Autonomous.blue;
+package org.firstinspires.ftc.teamcode.team11683.Autonomous.blue;
 
 
 import com.qualcomm.robotcore.eventloop.opmode.Autonomous;
 import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
 
-import org.firstinspires.ftc.teamcode.team4348.bot.IdealBot;
-import org.firstinspires.ftc.teamcode.team4348.utils.Utilities;
+import org.firstinspires.ftc.teamcode.team11683.bot.IdealBot;
+import org.firstinspires.ftc.teamcode.team11683.utils.Utilities;
 
 /**
  * This class is the blue alliance autonomous. It consists of just the function runOpMode.
@@ -13,8 +13,8 @@ import org.firstinspires.ftc.teamcode.team4348.utils.Utilities;
  * This will later be filled to make the robot complete autonomous function.
  * Your bot variable goes in this class to access hardware.
  */
-@Autonomous(name="BlueAuto")
-public class BlueAuto extends LinearOpMode
+@Autonomous(name="JVBridgeAuto")
+public class BlueAutoBridge extends LinearOpMode
 {
     private IdealBot bot = new IdealBot();
 
@@ -28,10 +28,11 @@ public class BlueAuto extends LinearOpMode
     public void runOpMode()
     {
         bot.init(hardwareMap);
+        bot.clamp.setPosition(0.35);
         waitForStart();
-        bot.lMotor.setPower(-1);
-        bot.rMotor.setPower(-1);
-        Utilities.delay(4000);
+        bot.lMotor.setPower(1);
+        bot.rMotor.setPower(1);
+        Utilities.delay(3000);
         bot.lMotor.setPower(0);
         bot.rMotor.setPower(0);
     }

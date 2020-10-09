@@ -33,7 +33,7 @@ public class DriveConstants {
      * Set the first flag appropriately. If using the built-in motor velocity PID, update
      * MOTOR_VELO_PID with the tuned coefficients from DriveVelocityPIDTuner.
      */
-    public static final boolean RUN_USING_ENCODER = true;
+    public static final boolean RUN_USING_ENCODER = false;
     public static final PIDCoefficients MOTOR_VELO_PID = null;
 
     /*
@@ -44,7 +44,8 @@ public class DriveConstants {
      * angular distances although most angular parameters are wrapped in Math.toRadians() for
      * convenience. Make sure to exclude any gear ratio included in MOTOR_CONFIG from GEAR_RATIO.
      */
-    public static double WHEEL_RADIUS = 1.5;
+    public static double WHEEL_RADIUS = (1.5 / (10.2447206 / 0.38164154 / 6.96594427 / 1.01554412));
+    public static double MIDDLE_WHEEL_RADIUS = (1.5 / (10.2447206 / 0.38164154 / 6.96594427 / 1.01554412)) * 1.05779684 * 0.95472989 * 0.95710984;
     public static double GEAR_RATIO = 3; // output (wheel) speed / input (motor) speed
     public static double TRACK_WIDTH = 14;
 
@@ -54,9 +55,9 @@ public class DriveConstants {
      * motor encoders or have elected not to use them for velocity control, these values should be
      * empirically tuned.
      */
-    public static double kV = 1.0 / rpmToVelocity(getMaxRpm());
-    public static double kA = 0;
-    public static double kStatic = 0;
+    public static double kV = 0.07936 / rpmToVelocity(getMaxRpm());
+    public static double kA = 0.00033;
+    public static double kStatic = 0.32682;
 
     /*
      * These values are used to generate the trajectories for you robot. To ensure proper operation,
@@ -67,7 +68,7 @@ public class DriveConstants {
      * forces acceleration-limited profiling).
      */
     public static DriveConstraints BASE_CONSTRAINTS = new DriveConstraints(
-            60, 40, 0.0,
+            35, 20, 0.0,
             Math.toRadians(180.0), Math.toRadians(180.0), 0.0
     );
 

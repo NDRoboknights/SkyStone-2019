@@ -59,7 +59,6 @@ public class IdealBot extends Bot
 
         clamp = hardwareMap.servo.get("clamp");
 
-        imu = new REVHubIMU(hardwareMap, "imu", revimu);
     }
 
     public void resetAllEnc()

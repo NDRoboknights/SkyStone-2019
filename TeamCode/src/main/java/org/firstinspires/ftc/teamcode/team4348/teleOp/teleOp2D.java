@@ -30,7 +30,7 @@ public class teleOp2D extends OpMode
     public void init()
     {
         bot.init(hardwareMap);
-        bot.lClamp.setPosition(0.);
+        bot.lClamp.setPosition(0.2);
     }
 
     /**
@@ -40,10 +40,10 @@ public class teleOp2D extends OpMode
 
     public void loop()
     {
-        double lStick1 = -gamepad1.left_stick_y * 0.75;
-        double rStick1 = gamepad1.right_stick_y * 0.75;
+        double lStick1 = gamepad1.left_stick_y * 0.55;
+        double rStick1 = gamepad1.right_stick_y * 0.55;
 
-        double rStick2 = gamepad2.right_stick_y * 0.75;
+        double rStick2 = gamepad2.right_stick_y * 0.5;
 
         if(Math.abs(lStick1)>stickThresh)
         {
@@ -77,9 +77,9 @@ public class teleOp2D extends OpMode
         }else{
             bot.slide.setPower(0);
         }
-        if(gamepad1.left_bumper)
+        if(Math.abs(gamepad1.right_stick_x) > stickThresh)
         {
-            bot.slide.setPower(1);
+            bot.slide.setPower(gamepad1.right_stick_x);
         }else{
             bot.slide.setPower(0);
         }
@@ -91,7 +91,7 @@ public class teleOp2D extends OpMode
 
         if(gamepad2.b)
         {
-            bot.lClamp.setPosition(0);
+            bot.lClamp.setPosition(0.2);
         }
 
         //telemetry.addData("IMU Value: ", bot.imu.normalizeValue(bot.imu.getValue()));

@@ -19,7 +19,6 @@ import com.acmerobotics.roadrunner.trajectory.constraints.DriveConstraints;
 import com.acmerobotics.roadrunner.trajectory.constraints.MecanumConstraints;
 import com.acmerobotics.roadrunner.util.NanoClock;
 import com.qualcomm.robotcore.hardware.DcMotor;
-import com.qualcomm.robotcore.hardware.HardwareMap;
 
 import org.firstinspires.ftc.teamcode.team4348.utils.DashboardUtil;
 
@@ -203,7 +202,7 @@ public abstract class HDriveBase extends MecanumDrive
         }
     }
 
-    private boolean isBusy() {
+    public boolean isBusy() {
         return mode != Mode.IDLE;
     }
 
